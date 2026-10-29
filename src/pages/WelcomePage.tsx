@@ -75,7 +75,7 @@ export const WelcomePage: React.FC = () => {
         <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-3">
           {isCompany ? (
             <>
-              <Link to="/company/problems/new" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md font-bold text-xs btn-pixel-accent"><span>{lang === 'ar' ? 'انشر تحدياً' : 'Post a challenge'}</span><ArrowIcon className="w-4 h-4" /></Link>
+              <Link to="/company/problems/new" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md font-bold text-xs btn-pixel-accent"><span>{lang === 'ar' ? 'اطرح تحديًا' : 'Post a challenge'}</span><ArrowIcon className="w-4 h-4" /></Link>
               <Link to="/company/problems" className="w-full sm:w-auto inline-flex items-center justify-center px-5 py-3 rounded-md font-bold text-xs btn-pixel-secondary">{lang === 'ar' ? 'إدارة تحدياتي' : 'Manage my challenges'}</Link>
             </>
           ) : (

@@ -98,7 +98,7 @@ const CompanyProblemsContent: React.FC = () => {
           className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-md font-bold text-xs btn-pixel-accent shrink-0"
         >
           <Plus className="w-4 h-4" />
-          {lang === 'ar' ? 'طرح تحدٍّ صناعي جديد +' : 'Post a new challenge +'}
+          {lang === 'ar' ? 'اطرح تحديًا' : 'Post a challenge'}
         </Link>
       </div>
 
@@ -204,7 +204,7 @@ const CompanyProblemsContent: React.FC = () => {
             className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-md font-bold text-xs btn-pixel-accent"
           >
             <Plus className="w-4 h-4" />
-            {lang === 'ar' ? 'طرح أول تحدٍّ الآن' : 'Post first challenge'}
+            {lang === 'ar' ? 'اطرح تحديًا' : 'Post a challenge'}
           </Link>
         </div>
       ) : (

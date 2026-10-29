@@ -6,7 +6,7 @@ import { AlertCircle } from 'lucide-react';
 import { apiErrorMessage } from '../api/client';
 
 export const SignInPage: React.FC = () => {
-  const { lang, setLang, login } = useApp();
+  const { lang, login } = useApp();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -61,7 +61,7 @@ export const SignInPage: React.FC = () => {
     try {
       const user = await login(email, password);
       const from = (location.state as { from?: string } | null)?.from;
-      navigate(from || (user.role === 'company' ? '/company/problems' : '/community'), { replace: true });
+      navigate(from || (user.role === 'company' ? '/company/problems' : user.role === 'solver' ? '/problems' : '/community'), { replace: true });
     } catch (apiError) {
       setError(apiErrorMessage(apiError, lang));
     } finally {
@@ -87,12 +87,12 @@ export const SignInPage: React.FC = () => {
               <MascotRex width={80} height={60} />
             </div>
             <h2 className="text-xl font-bold mb-3">
-              {lang === 'ar' ? 'أهلًا بعودتك إلى المجتمع' : 'Welcome back to the community'}
+              {lang === 'ar' ? 'أهلًا بعودتك إلى Rexios AI' : 'Welcome back to Rexios AI'}
             </h2>
             <p className="text-xs text-[#C9D3FF] leading-relaxed max-w-xs">
               {lang === 'ar'
-                ? 'اسأل، أجب، وتعلّم من مشكلات حقيقية يواجهها زملاؤك في الصناعة والتطوير.'
-                : 'Ask, answer, and learn from real problems faced by peers in engineering & industry.'}
+                ? 'اطرح تحديًا لشركتك، قدّم مقترح حل، أو شارك المعرفة في المجتمع التقني.'
+                : 'Post a company challenge, propose a solution, or share knowledge in the technical community.'}
             </p>
           </div>
 
@@ -155,26 +155,6 @@ export const SignInPage: React.FC = () => {
             <span className="font-brand text-xs font-bold text-[#5B5B7B] uppercase">
               {lang === 'ar' ? 'حساب Rexios' : 'Rexios Account'}
             </span>
-            <div className="flex items-center bg-[#EFE4CC] border-2 border-[#12122B] rounded-full p-0.5 text-xs font-bold">
-              <button
-                type="button"
-                onClick={() => setLang('ar')}
-                className={`px-2 py-0.5 rounded-full transition-all cursor-pointer ${
-                  lang === 'ar' ? 'bg-[#0B2A9E] text-[#FFFBF1]' : 'text-[#12122B]'
-                }`}
-              >
-                عربي
-              </button>
-              <button
-                type="button"
-                onClick={() => setLang('en')}
-                className={`px-2 py-0.5 rounded-full transition-all cursor-pointer ${
-                  lang === 'en' ? 'bg-[#0B2A9E] text-[#FFFBF1]' : 'text-[#12122B]'
-                }`}
-              >
-                EN
-              </button>
-            </div>
           </div>
 
           <div>
@@ -183,8 +163,8 @@ export const SignInPage: React.FC = () => {
             </h1>
             <p className="text-xs text-[#5B5B7B] mb-6">
               {lang === 'ar'
-                ? 'سجّل الدخول للمشاركة في النقاشات وطرح الأسئلة.'
-                : 'Sign in to participate in discussions and ask questions.'}
+                ? 'سجّل الدخول لإدارة التحديات والمقترحات والمشاركة في النقاشات.'
+                : 'Sign in to manage challenges, proposals, and discussions.'}
             </p>
 
             <button
@@ -266,21 +246,6 @@ export const SignInPage: React.FC = () => {
                   }`}
                   required
                 />
-              </div>
-
-              <div className="flex items-center gap-2 pt-1">
-                <label className="text-[11px] text-[#5B5B7B] flex items-center gap-1.5 cursor-pointer select-none">
-                  <input
-                    type="checkbox"
-                    onChange={() => undefined}
-                    className="accent-[#E5432A]"
-                  />
-                  <span>
-                    {lang === 'ar'
-                      ? 'محاكاة خطأ كلمة المرور (حالة التصميم 03)'
-                      : 'Simulate incorrect password state (Screen 03)'}
-                  </span>
-                </label>
               </div>
 
               <button

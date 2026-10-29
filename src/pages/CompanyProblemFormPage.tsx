@@ -31,7 +31,7 @@ const CompanyProblemFormContent: React.FC = () => {
   }, [id]);
 
   return <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-6">
-    <nav className="flex items-center gap-2 text-xs text-[#5B5B7B]"><Link to="/company/problems" className="hover:underline">{lang === 'ar' ? 'تحديات شركتي' : 'My Challenges'}</Link><Chevron className="w-3.5 h-3.5" /><span className="font-bold text-[#12122B]">{lang === 'ar' ? (id ? 'تعديل التحدي الصناعي' : 'طرح تحدٍّ صناعي') : (id ? 'Edit challenge' : 'Post a challenge')}</span></nav>
+    <nav className="flex items-center gap-2 text-xs text-[#5B5B7B]"><Link to="/company/problems" className="hover:underline">{lang === 'ar' ? 'تحديات شركتي' : 'My Challenges'}</Link><Chevron className="w-3.5 h-3.5" /><span className="font-bold text-[#12122B]">{lang === 'ar' ? (id ? 'تعديل التحدي الصناعي' : 'اطرح تحديًا') : (id ? 'Edit challenge' : 'Post a challenge')}</span></nav>
     {loading ? <div className="card-pixel p-10 text-center text-sm text-[#5B5B7B]">{lang === 'ar' ? 'جارٍ تحميل المشكلة…' : 'Loading problem…'}</div>
       : error ? <div className="card-pixel p-8 text-center"><AlertCircle className="w-6 h-6 text-[#E5432A] mx-auto mb-3" /><p className="text-sm font-semibold text-[#E5432A]">{apiErrorMessage(error, lang)}</p><Link to="/company/problems" className="inline-block mt-4 text-xs text-[#0B2A9E] underline">{lang === 'ar' ? 'العودة إلى تحديات شركتي' : 'Back to My Challenges'}</Link></div>
         : <>

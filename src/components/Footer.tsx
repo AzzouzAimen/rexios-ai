@@ -32,7 +32,7 @@ export const Footer: React.FC = () => {
             {lang === 'ar' ? 'المجتمع التقني' : 'Community'}
           </Link>
           <Link to="/problems" className="hover:underline">
-            {lang === 'ar' ? 'التحديات الصناعية' : 'Problems'}
+            {lang === 'ar' ? 'التحديات' : 'Challenges'}
           </Link>
           <Link to="/about" className="hover:underline">
             {lang === 'ar' ? 'عن المنصة' : 'About'}

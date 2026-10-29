@@ -94,7 +94,7 @@ export const ProblemsListPage: React.FC = () => {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold text-[#12122B] tracking-tight">
-            {lang === 'ar' ? 'التحديات والمشكلات الصناعية' : 'Industrial Problems & Challenges'}
+            {lang === 'ar' ? 'التحديات' : 'Challenges'}
           </h1>
           <p className="text-xs sm:text-sm text-[#5B5B7B] mt-1">
             {lang === 'ar'
@@ -108,7 +108,7 @@ export const ProblemsListPage: React.FC = () => {
               {lang === 'ar' ? 'إدارة تحدياتي' : 'Manage My Challenges'}
             </Link>
             <Link to="/company/problems/new" className="px-4 py-2.5 rounded-md font-bold text-xs btn-pixel-accent">
-              {lang === 'ar' ? 'طرح تحدٍّ صناعي جديد +' : 'Post a challenge +'}
+              {lang === 'ar' ? 'اطرح تحديًا' : 'Post a challenge'}
             </Link>
           </div>
         )}

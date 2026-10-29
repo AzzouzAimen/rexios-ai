@@ -12,8 +12,8 @@ export const AuthPromptModal: React.FC = () => {
 
   const content = {
     title: {
-      ar: 'انضم إلى مجتمع Rexios AI للمشاركة',
-      en: 'Join the community to participate',
+      ar: 'أنشئ حسابًا على Rexios AI للمشاركة',
+      en: 'Create a Rexios AI account to participate',
     },
     body: {
       ar: 'بإمكانك الاطّلاع على الأسئلة والتحديات كزائر، لكن طرح الاستفسارات وتقديم الحلول والمشاركة تتطلب حساباً مسجلاً.',

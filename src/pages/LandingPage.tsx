@@ -32,7 +32,7 @@ export const LandingPage: React.FC = () => {
   const secondaryLabel = currentRole === 'solver'
     ? (lang === 'ar' ? 'طلباتي' : 'My applications')
     : currentRole === 'company'
-      ? (lang === 'ar' ? 'انشر تحدياً' : 'Post a challenge')
+      ? (lang === 'ar' ? 'اطرح تحديًا' : 'Post a challenge')
       : (lang === 'ar' ? 'تصفّح المجتمع' : 'Browse community');
 
   return (
@@ -42,7 +42,7 @@ export const LandingPage: React.FC = () => {
           <div className="lg:col-span-7 flex flex-col items-start gap-6">
             <span className="inline-flex items-center gap-2 px-3 py-1 bg-[#EEF1FF] border-2 border-[#12122B] rounded-full text-xs font-tag tracking-wider text-[#0B2A9E] font-bold shadow-pixel-s">
               <span className="w-2 h-2 bg-[#0B2A9E] rounded-full animate-pulse" />
-              {lang === 'ar' ? 'مجتمع تقني · نسخة تجريبية' : 'COMMUNITY · BETA'}
+              {lang === 'ar' ? 'منصة تحديات تقنية · نسخة تجريبية' : 'CHALLENGE PLATFORM · BETA'}
             </span>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight text-[#12122B]">
@@ -65,8 +65,8 @@ export const LandingPage: React.FC = () => {
 
             <p className="text-base sm:text-lg text-[#5B5B7B] leading-relaxed max-w-2xl">
               {lang === 'ar'
-                ? 'مجتمع جزائري يسأل فيه الطلاب والمطورون والتقنيون، ويتشاركون الحلول ويبنون خبرة عملية حقيقية على مشكلات واقعية من الشركات الصناعية.'
-                : 'An Algerian community where students, developers and technologists ask questions, share solutions and build real experience on problems from industry.'}
+                ? 'منصة جزائرية تربط الشركات بالمواهب التقنية من خلال تحديات حقيقية. تصوغ الشركات احتياجاتها بمساعدة الذكاء الاصطناعي، وتتلقى مقترحات الحلول، ويتبادل الجميع المعرفة في المجتمع التقني.'
+                : 'An Algerian platform connecting companies with technical talent through real challenges. Companies frame their needs with AI and review solution proposals, while everyone can share knowledge in the technical community.'}
             </p>
 
             <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto pt-2">
@@ -144,12 +144,12 @@ export const LandingPage: React.FC = () => {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full" id="about">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <h2 className="text-2xl sm:text-3xl font-bold text-[#12122B] mb-3">
-            {lang === 'ar' ? 'كيف يعمل المجتمع؟' : 'How does the community work?'}
+            {lang === 'ar' ? 'كيف تعمل المنصة؟' : 'How does the platform work?'}
           </h2>
           <p className="text-sm sm:text-base text-[#5B5B7B]">
             {lang === 'ar'
-              ? 'ثلاث خطوات بسيطة من القراءة إلى المساهمة'
-              : 'Three simple steps from reading to contributing'}
+              ? 'من احتياج الشركة إلى اختيار صاحب الحل المناسب'
+              : 'From a company’s need to selecting the right talent'}
           </p>
         </div>
 
@@ -159,12 +159,12 @@ export const LandingPage: React.FC = () => {
               <Eye className="w-6 h-6 stroke-[2.2]" />
             </div>
             <h3 className="text-lg font-bold text-[#12122B]">
-              {lang === 'ar' ? '1 · اقرأ بحرية' : '1 · Read freely'}
+              {lang === 'ar' ? '1 · اطرح تحديًا' : '1 · Post a challenge'}
             </h3>
             <p className="text-sm text-[#5B5B7B] leading-relaxed">
               {lang === 'ar'
-                ? 'تصفّح الأسئلة والأجوبة دون حساب وتعلّم من المشكلات والتحديات الهندسية التي يواجهها الآخرون.'
-                : 'Browse questions and answers without an account and learn from problems others face.'}
+                ? 'تصف الشركة مشكلتها، وتحول الملاحظات بمساعدة الذكاء الاصطناعي إلى تحدٍّ واضح بمتطلبات وميزانية.'
+                : 'The company describes its problem and uses AI to turn rough notes into a clear challenge with requirements and a budget.'}
             </p>
           </div>
 
@@ -173,12 +173,12 @@ export const LandingPage: React.FC = () => {
               <UserCheck className="w-6 h-6 stroke-[2.2]" />
             </div>
             <h3 className="text-lg font-bold text-[#12122B]">
-              {lang === 'ar' ? '2 · سجّل وشارك' : '2 · Sign up and participate'}
+              {lang === 'ar' ? '2 · قدّم مقترح حل' : '2 · Propose a solution'}
             </h3>
             <p className="text-sm text-[#5B5B7B] leading-relaxed">
               {lang === 'ar'
-                ? 'أنشئ حسابًا بالبريد الإلكتروني، ثم اطرح أسئلتك، أجب على زملائك، وناقش تفاصيل المشكلات.'
-                : 'Create an account with email, then ask questions and discuss problems.'}
+                ? 'تتصفح المواهب التحديات، وتناقش التفاصيل، وتقدم مقترحات تناسب مهاراتها.'
+                : 'Talent explores challenges, clarifies details, and submits proposals suited to their skills.'}
             </p>
           </div>
 
@@ -187,12 +187,12 @@ export const LandingPage: React.FC = () => {
               <Award className="w-6 h-6 stroke-[2.2]" />
             </div>
             <h3 className="text-lg font-bold text-[#12122B]">
-              {lang === 'ar' ? '3 · كن خبير حلول' : '3 · Become a solver'}
+              {lang === 'ar' ? '3 · راجع واختر' : '3 · Review and select'}
             </h3>
             <p className="text-sm text-[#5B5B7B] leading-relaxed">
               {lang === 'ar'
-                  ? 'أكمل ملفك الهندسي والتقني (الخلفية والمهارات ورابط مهني أو سيرة ذاتية) وقدّم مقترحات للتحديات.'
-                  : 'Complete your talent profile (background, skills and a professional link or CV) to submit challenge proposals.'}
+                  ? 'تقارن الشركة المقترحات وتختار المتقدم المناسب. تُتفق ترتيبات التنفيذ والدفع مباشرة بين الطرفين.'
+                  : 'The company compares proposals and selects an applicant. Delivery and payment arrangements are agreed directly between both parties.'}
             </p>
           </div>
         </div>
@@ -205,12 +205,22 @@ export const LandingPage: React.FC = () => {
           </h2>
           <p className="text-sm sm:text-base text-[#5B5B7B]">
               {lang === 'ar'
-                ? 'الزوّار يقرأون، الأعضاء يشاركون، والمواهب تقدّم المقترحات'
-                : 'Visitors read, members participate, and talent submits proposals'}
+                ? 'الشركات تطرح التحديات، والمواهب تقدم الحلول، والجميع يتبادل المعرفة'
+                : 'Companies post challenges, talent proposes solutions, and everyone shares knowledge'}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+          <div className="card-pixel p-6 flex flex-col justify-between bg-[#EEF1FF]">
+            <div>
+              <span className="font-tag text-xs font-bold px-2 py-0.5 bg-[#C9D3FF] border border-[#12122B] rounded-full">{lang === 'ar' ? 'شركة' : 'COMPANY'}</span>
+              <h3 className="text-xl font-bold mt-4 mb-5">{lang === 'ar' ? 'الشركات' : 'Companies'}</h3>
+              <ul className="flex flex-col gap-3.5 text-sm">
+                {(lang === 'ar' ? ['صياغة التحديات بمساعدة الذكاء الاصطناعي', 'نشر المتطلبات والميزانية والموعد', 'مراجعة المقترحات واختيار المتقدم', 'تبادل المعرفة في المجتمع التقني'] : ['Frame challenges with AI assistance', 'Publish requirements, budget and deadline', 'Review proposals and select an applicant', 'Share knowledge in the technical community']).map(item => <li key={item} className="flex items-start gap-2.5"><Check className="w-4 h-4 shrink-0 mt-0.5 text-[#1E9E5A]" /><span>{item}</span></li>)}
+              </ul>
+            </div>
+            <Link to="/signup?account=company" className="mt-8 w-full py-2.5 px-4 text-center rounded-md font-bold text-xs btn-pixel-accent">{lang === 'ar' ? 'إنشاء حساب شركة' : 'Create a company account'}</Link>
+          </div>
           <div className="card-pixel p-6 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-4">
@@ -228,7 +238,7 @@ export const LandingPage: React.FC = () => {
               <ul className="flex flex-col gap-3.5 text-sm text-[#12122B]">
                 <li className="flex items-center gap-2.5">
                   <Check className="w-4 h-4 text-[#1E9E5A] stroke-[3]" />
-                  <span>{lang === 'ar' ? 'قراءة المنشورات والمشكلات' : 'Read posts and problems'}</span>
+                  <span>{lang === 'ar' ? 'قراءة المنشورات والتحديات' : 'Read posts and challenges'}</span>
                 </li>
                 <li className="flex items-center gap-2.5 text-[#5B5B7B]">
                   <Lock className="w-4 h-4 text-[#A3A3BC]" />
@@ -270,7 +280,7 @@ export const LandingPage: React.FC = () => {
               <ul className="flex flex-col gap-3.5 text-sm text-[#12122B]">
                 <li className="flex items-center gap-2.5">
                   <Check className="w-4 h-4 text-[#1E9E5A] stroke-[3]" />
-                  <span>{lang === 'ar' ? 'قراءة المنشورات والمشكلات' : 'Read posts and problems'}</span>
+                  <span>{lang === 'ar' ? 'قراءة المنشورات والتحديات' : 'Read posts and challenges'}</span>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <Check className="w-4 h-4 text-[#1E9E5A] stroke-[3]" />
@@ -312,7 +322,7 @@ export const LandingPage: React.FC = () => {
               <ul className="flex flex-col gap-3.5 text-sm text-[#12122B]">
                 <li className="flex items-center gap-2.5">
                   <Check className="w-4 h-4 text-[#1E9E5A] stroke-[3]" />
-                  <span>{lang === 'ar' ? 'قراءة المنشورات والمشكلات' : 'Read posts and problems'}</span>
+                  <span>{lang === 'ar' ? 'قراءة المنشورات والتحديات' : 'Read posts and challenges'}</span>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <Check className="w-4 h-4 text-[#1E9E5A] stroke-[3]" />
@@ -333,7 +343,7 @@ export const LandingPage: React.FC = () => {
               to={currentRole === 'visitor' ? '/signup' : currentRole === 'company' ? '/company/problems/new' : currentRole === 'solver' ? '/problems' : '/profile/solver'}
               className="mt-8 w-full py-2.5 px-4 text-center rounded-md font-bold text-xs btn-pixel-accent"
             >
-              {currentRole === 'visitor' ? (lang === 'ar' ? 'أنشئ حساباً للبدء' : 'Create an account to start') : currentRole === 'company' ? (lang === 'ar' ? 'انشر تحدياً' : 'Post a challenge') : currentRole === 'solver' ? (lang === 'ar' ? 'تصفّح التحديات' : 'Browse challenges') : (lang === 'ar' ? 'أكمل ملف المواهب' : 'Complete talent profile')}
+              {currentRole === 'visitor' ? (lang === 'ar' ? 'أنشئ حساباً للبدء' : 'Create an account to start') : currentRole === 'company' ? (lang === 'ar' ? 'اطرح تحديًا' : 'Post a challenge') : currentRole === 'solver' ? (lang === 'ar' ? 'تصفّح التحديات' : 'Browse challenges') : (lang === 'ar' ? 'أكمل ملف المواهب' : 'Complete talent profile')}
             </Link>
           </div>
         </div>
@@ -343,7 +353,7 @@ export const LandingPage: React.FC = () => {
         <div className="bg-[#0B2A9E] border-2 border-[#12122B] rounded-lg p-8 sm:p-12 text-[#FFFBF1] shadow-pixel-l flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="flex flex-col gap-2 max-w-xl text-center md:text-start">
             <h2 className="text-2xl sm:text-3xl font-bold text-[#FFFBF1]">
-              {lang === 'ar' ? 'جاهز للانضمام إلى المجتمع؟' : 'Ready to join the community?'}
+              {lang === 'ar' ? 'جاهز للبدء مع Rexios AI؟' : 'Ready to get started with Rexios AI?'}
             </h2>
             <p className="text-sm sm:text-base text-[#C9D3FF]">
               {lang === 'ar'

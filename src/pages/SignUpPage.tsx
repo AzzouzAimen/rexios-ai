@@ -7,7 +7,7 @@ import { apiErrorMessage } from '../api/client';
 import type { AccountType } from '../api/contracts';
 
 export const SignUpPage: React.FC = () => {
-  const { lang, setLang, signup } = useApp();
+  const { lang, signup } = useApp();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -17,7 +17,7 @@ export const SignUpPage: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [termsAccepted, setTermsAccepted] = useState(true);
   const [error, setError] = useState('');
-  const [accountType, setAccountType] = useState<AccountType>('TALENT');
+  const [accountType, setAccountType] = useState<AccountType>(() => new URLSearchParams(location.search).get('account') === 'company' ? 'COMPANY' : 'TALENT');
   const [busy, setBusy] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -91,12 +91,12 @@ export const SignUpPage: React.FC = () => {
               <MascotRex width={80} height={60} />
             </div>
             <h2 className="text-xl font-bold mb-3">
-              {lang === 'ar' ? 'انضم إلى مجتمع التقنيين' : 'Join the technologist community'}
+              {lang === 'ar' ? 'انضم إلى منصة Rexios AI' : 'Join the Rexios AI platform'}
             </h2>
             <p className="text-xs text-[#C9D3FF] leading-relaxed max-w-xs">
               {lang === 'ar'
-                ? 'اسأل، أجب، وتعلّم من مشكلات حقيقية يواجهها زملاؤك في الصناعة والتطوير.'
-                : 'Ask, answer, and learn from real problems faced by peers in engineering & industry.'}
+                ? 'اربط احتياجات شركتك بالمواهب التقنية، أو اعرض مهاراتك من خلال حل تحديات حقيقية.'
+                : 'Connect your company’s needs with technical talent, or demonstrate your skills through real challenges.'}
             </p>
           </div>
 
@@ -112,26 +112,6 @@ export const SignUpPage: React.FC = () => {
             <span className="font-brand text-xs font-bold text-[#5B5B7B] uppercase">
               {lang === 'ar' ? 'حساب Rexios' : 'Rexios Account'}
             </span>
-            <div className="flex items-center bg-[#EFE4CC] border-2 border-[#12122B] rounded-full p-0.5 text-xs font-bold">
-              <button
-                type="button"
-                onClick={() => setLang('ar')}
-                className={`px-2 py-0.5 rounded-full transition-all cursor-pointer ${
-                  lang === 'ar' ? 'bg-[#0B2A9E] text-[#FFFBF1]' : 'text-[#12122B]'
-                }`}
-              >
-                عربي
-              </button>
-              <button
-                type="button"
-                onClick={() => setLang('en')}
-                className={`px-2 py-0.5 rounded-full transition-all cursor-pointer ${
-                  lang === 'en' ? 'bg-[#0B2A9E] text-[#FFFBF1]' : 'text-[#12122B]'
-                }`}
-              >
-                EN
-              </button>
-            </div>
           </div>
 
           <div>
@@ -139,7 +119,7 @@ export const SignUpPage: React.FC = () => {
               {lang === 'ar' ? 'أنشئ حسابك' : 'Create your account'}
             </h1>
             <p className="text-xs text-[#5B5B7B] mb-6">
-              {lang === 'ar' ? 'انضم للمجتمع في أقل من دقيقة.' : 'Join the community in under a minute.'}
+              {lang === 'ar' ? 'أنشئ حساب مواهب أو شركة للبدء.' : 'Create a talent or company account to get started.'}
             </p>
 
             <button

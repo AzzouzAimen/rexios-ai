@@ -39,8 +39,8 @@ export const Navbar: React.FC = () => {
       : '/';
 
   const navLinks = [
-    { to: homeTo, label: { ar: 'الرئيسية', en: 'Home' }, exact: true },
-    { to: '/problems', label: { ar: 'التحديات الصناعية', en: 'Problems' } },
+    ...(currentRole === 'visitor' ? [{ to: '/', label: { ar: 'الرئيسية', en: 'Home' }, exact: true }] : []),
+    { to: '/problems', label: { ar: 'التحديات', en: 'Challenges' } },
     ...(currentRole === 'company'
       ? [{ to: '/company/problems', label: { ar: 'تحديات شركتي', en: 'My Challenges' } }]
       : []),
@@ -63,7 +63,7 @@ export const Navbar: React.FC = () => {
             <button
               type="button"
               onClick={() => setSidebarOpen(true)}
-              className="p-2 rounded-md bg-[#FFFBF1] border-2 border-[#12122B] shadow-pixel-s hover:bg-[#EFE4CC] cursor-pointer shrink-0 transition-transform active:scale-95"
+              className="lg:hidden p-2 rounded-md bg-[#FFFBF1] border-2 border-[#12122B] shadow-pixel-s hover:bg-[#EFE4CC] cursor-pointer shrink-0 transition-transform active:scale-95"
               aria-label={lang === 'ar' ? 'فتح القائمة الجانبية' : 'Open Sidebar'}
               title={lang === 'ar' ? 'القائمة' : 'Menu'}
             >
@@ -149,7 +149,7 @@ export const Navbar: React.FC = () => {
                     to="/company/problems/new"
                     className="hidden sm:inline-flex px-3 py-1.5 text-xs font-bold rounded-md btn-pixel-accent whitespace-nowrap shrink-0"
                   >
-                    {lang === 'ar' ? 'طرح مشكلة +' : 'Post a Problem +'}
+                    {lang === 'ar' ? 'اطرح تحديًا' : 'Post a challenge'}
                   </Link>
                 ) : (
                   <Link
@@ -229,7 +229,7 @@ export const Navbar: React.FC = () => {
                             className="flex items-center gap-2 px-3 py-2 rounded text-xs font-semibold text-[#12122B] hover:bg-[#EFE4CC]"
                           >
                             <FileText className="w-4 h-4 text-[#0B2A9E]" />
-                            <span>{lang === 'ar' ? 'طرح تحدٍّ جديد' : 'Post Challenge'}</span>
+                            <span>{lang === 'ar' ? 'اطرح تحديًا' : 'Post a challenge'}</span>
                           </Link>
                         </>
                       ) : (

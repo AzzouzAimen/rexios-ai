@@ -65,15 +65,15 @@ export const CollapsibleSidebar: React.FC<Props> = ({ open, onClose }) => {
   };
 
   const navLinks = [
-    {
+    ...(currentRole === 'visitor' ? [{
       to: homeTo,
       label: { ar: 'الرئيسية', en: 'Home' },
       icon: Home,
       exact: true,
-    },
+    }] : []),
     {
       to: '/problems',
-      label: { ar: 'التحديات الصناعية', en: 'Problems' },
+      label: { ar: 'التحديات', en: 'Challenges' },
       icon: BriefcaseBusiness,
     },
     ...(currentRole === 'company'
@@ -112,7 +112,7 @@ export const CollapsibleSidebar: React.FC<Props> = ({ open, onClose }) => {
   ];
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden">
+    <div className="lg:hidden fixed inset-0 z-50 overflow-hidden">
       <div
         className="fixed inset-0 bg-[#12122B]/60 backdrop-blur-xs transition-opacity animate-in fade-in cursor-pointer"
         onClick={onClose}
@@ -225,7 +225,7 @@ export const CollapsibleSidebar: React.FC<Props> = ({ open, onClose }) => {
                   className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-md font-bold text-xs btn-pixel-accent text-center"
                 >
                   <PlusCircle className="w-4 h-4" />
-                  <span>{lang === 'ar' ? 'طرح تحدٍّ صناعي جديد +' : 'Post a Problem +'}</span>
+                  <span>{lang === 'ar' ? 'اطرح تحديًا' : 'Post a challenge'}</span>
                 </Link>
               ) : (
                 <Link
