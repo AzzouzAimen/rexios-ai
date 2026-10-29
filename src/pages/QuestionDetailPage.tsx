@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { TagChip } from '../components/TagChip';
 import { ReactionButton } from '../components/ReactionButton';
+import { ReportButton } from '../components/ReportButton';
 import { useCommunityQuestion } from '../hooks/useCommunity';
 import { Lock, CheckCircle2, ChevronRight, ChevronLeft, Send, AlertCircle } from 'lucide-react';
 
@@ -137,7 +138,10 @@ export const QuestionDetailPage: React.FC = () => {
             <ReactionButton type="insight" count={question.insightCount} active={question.viewerReactions.includes('insight')} pending={community.isReactionPending(question.id, 'insight')} disabled={isOwner} onClick={() => currentRole === 'visitor' ? openAuthModal() : void community.toggleQuestionReaction('insight')} />
             <ReactionButton type="helpful" count={question.helpfulCount} active={question.viewerReactions.includes('helpful')} pending={community.isReactionPending(question.id, 'helpful')} disabled={isOwner} onClick={() => currentRole === 'visitor' ? openAuthModal() : void community.toggleQuestionReaction('helpful')} />
           </div>
-          <div className="text-xs text-[#5B5B7B]">{lang === 'ar' ? `${question.views} مشاهدة · ${totalAnswers} إجابات` : `${question.views} views · ${totalAnswers} answers`}</div>
+          <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-[#5B5B7B]">
+            <span>{lang === 'ar' ? `${question.views} مشاهدة · ${totalAnswers} إجابات` : `${question.views} views · ${totalAnswers} answers`}</span>
+            <ReportButton targetType="QUESTION" targetId={question.id} />
+          </div>
         </div>
       </article>
 
@@ -154,7 +158,7 @@ export const QuestionDetailPage: React.FC = () => {
         ) : totalAnswers === 0 ? (
           <div className="card-pixel p-6 text-center text-xs text-[#5B5B7B]">{lang === 'ar' ? 'لا توجد إجابات بعد. كن أول من يشارك بالحل!' : 'No answers yet. Be the first to share an answer!'}</div>
         ) : answers.map((answer) => (
-          <article key={answer.id} className={`card-pixel p-6 flex flex-col gap-4 ${answer.isAccepted ? 'border-[#1E9E5A] bg-[#FFFBF1]' : ''}`}>
+          <article key={answer.id} id={`answer-${answer.id}`} className={`card-pixel p-6 flex flex-col gap-4 scroll-mt-24 ${answer.isAccepted ? 'border-[#1E9E5A] bg-[#FFFBF1]' : ''}`}>
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs border-b border-[#EFE4CC] pb-3">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-[#1E9E5A] text-[#FFFBF1] flex items-center justify-center font-bold text-xs shadow-pixel-s">{lang === 'ar' ? answer.author.avatarChar : answer.author.nameEn?.trim().slice(0, 1) || answer.author.avatarChar}</div>
@@ -179,11 +183,12 @@ export const QuestionDetailPage: React.FC = () => {
             </div>
 
             <div className="text-xs sm:text-sm text-[#12122B] leading-relaxed whitespace-pre-line">{lang === 'ar' ? answer.body : answer.bodyEn}</div>
-            <div className="flex items-center justify-between pt-2 border-t border-[#EFE4CC] mt-1">
+            <div className="flex flex-wrap gap-2 items-center justify-between pt-2 border-t border-[#EFE4CC] mt-1">
               <div className="flex items-center gap-2">
                 <ReactionButton type="insight" count={answer.insightCount} active={answer.viewerReactions.includes('insight')} pending={community.isReactionPending(answer.id, 'insight')} disabled={answer.author.id === currentUser.id} onClick={() => currentRole === 'visitor' ? openAuthModal() : void community.toggleAnswerReaction(answer.id, 'insight')} />
                 <ReactionButton type="helpful" count={answer.helpfulCount} active={answer.viewerReactions.includes('helpful')} pending={community.isReactionPending(answer.id, 'helpful')} disabled={answer.author.id === currentUser.id} onClick={() => currentRole === 'visitor' ? openAuthModal() : void community.toggleAnswerReaction(answer.id, 'helpful')} />
               </div>
+              <ReportButton targetType="ANSWER" targetId={answer.id} />
             </div>
           </article>
         ))}

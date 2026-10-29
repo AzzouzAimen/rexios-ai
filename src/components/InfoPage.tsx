@@ -1,9 +1,11 @@
-import type { ReactNode } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useEffect, type ReactNode } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 
 export function InfoPage({ title, description, children }: { title: string; description: string; children: ReactNode }) {
   const { lang, dir } = useApp();
+  const { pathname, hash } = useLocation();
+  useEffect(() => { if (!hash) window.scrollTo(0, 0); }, [pathname, hash]);
   return <div dir={dir} className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-7">
     <header className="space-y-4">
       <span className="inline-block bg-[#C6FF3D] border-2 border-[#12122B] rounded px-3 py-1 text-xs font-bold shadow-pixel-s">REXIOS AI</span>

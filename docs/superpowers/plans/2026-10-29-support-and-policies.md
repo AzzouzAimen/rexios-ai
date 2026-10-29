@@ -51,12 +51,15 @@
 
 **Interfaces:** `ReportButton({targetType,targetId})` handles authentication, reason/details form, request state and confirmation. Native dialog supplies focus/Escape/backdrop behavior; do not stack an auth modal over it.
 
-- [ ] Add reusable localized reporting dialog and integrate challenge/question/answer detail actions.
-- [ ] Document routes, saved-data retrieval and policy factual edits.
-- [ ] Build both apps, lint, run relevant integration coverage, review diff and commit.
+- [x] Add reusable localized reporting dialog and integrate challenge/question/answer detail actions.
+- [x] Document routes, saved-data retrieval and policy factual edits.
+- [x] Build both apps, lint, run relevant integration coverage, review diff and commit.
 
 ## Progress
 
 - Planning complete; implementation authorized by the current user request.
 - Task 1 complete: API build passes; local additive migration applied; support integration test passes 5/5. Test fixtures corrected to follow existing registration password requirements and list-valued challenge requirements. No runtime behavior changes beyond the plan.
 - Task 2 complete: frontend build passes. Public policy/support routes, footer and signup links wired; contact alias redirects to support. Policy factual edits documented in the design.
+- Task 3 complete: shared native reporting dialog integrated with challenge/question/answer detail screens. New information pages scroll to their heading when opened from the footer. Read `docs/SUPPORT.md` for manual demo steps and database inbox queries.
+- Final verification: API build and frontend build pass; full integration suite 96/96 passes; lint has zero errors and four unchanged existing warnings; diff whitespace check passes. Local API restarted, health returns 200, and the three public page URLs return 200. No browser inspection, push or VPS deployment performed.
+- Final review: author review of DTOs, permissions, deduplication, privacy visibility, routes, bilingual copy, dialog lifecycle and mobile wrapping. No subagents used, following the user's preference.
