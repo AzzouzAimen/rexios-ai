@@ -78,4 +78,11 @@ test('chat cancellation and provider errors do not send repair calls; invalid ou
   let providerCalls = 0;
   await assert.rejects(generatePlatformChat(input, context, { complete: async () => { providerCalls++; throw new Error('offline'); } }, { signal: new AbortController().signal, maxRepairs: 2, progress: () => {} }), /offline/);
   assert.equal(providerCalls, 1);
+  const duringStream = new AbortController();
+  let streamCalls = 0;
+  await assert.rejects(generatePlatformChat(input, context, {
+    complete: model.complete,
+    async *stream() { streamCalls++; yield '{"answer":"Partial'; duringStream.abort(); yield ' response"}'; },
+  }, { signal: duringStream.signal, maxRepairs: 2, progress: () => {} }));
+  assert.equal(streamCalls, 1);
 });

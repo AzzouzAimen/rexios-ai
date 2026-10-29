@@ -67,7 +67,7 @@ test('public platform chat streams grounded guidance without exposing private ac
       const response = await request({ ...input, history: [{ role: 'user', content: 'What is Rexios?' }, { role: 'assistant', content: 'A platform for challenges.' }] }, true);
       assert.equal(response.events.at(-1).type, 'complete');
       const prompt = JSON.stringify(received.at(-1));
-      assert.match(prompt, /COMPANY/); assert.ok(!prompt.includes(email)); assert.ok(!prompt.includes(user.id)); assert.ok(!prompt.includes('Do not send this identity'));
+      assert.match(received.at(-1).messages[0].content, /"role":"COMPANY"/); assert.ok(!prompt.includes(email)); assert.ok(!prompt.includes(user.id)); assert.ok(!prompt.includes('Do not send this identity'));
       assert.deepEqual({ problems: await db.problem.count(), reports: await db.contentReport.count(), support: await db.supportRequest.count() }, before);
     });
     await t.test('bad output repairs safely and provider errors stay localized', async () => {

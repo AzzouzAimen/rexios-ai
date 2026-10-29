@@ -6,7 +6,9 @@ import { ChatOutputError, generatePlatformChat } from './platform-chat';
 import { normalizeChatPage, parseChatRequest } from './platform-chat.schema';
 
 function setting(name: string, fallback: number, min: number) {
-  const value = Number(process.env[name]);
+  const configured = process.env[name]?.trim();
+  if (!configured) return fallback;
+  const value = Number(configured);
   return Number.isSafeInteger(value) && value >= min && value <= 2147483647 ? value : fallback;
 }
 

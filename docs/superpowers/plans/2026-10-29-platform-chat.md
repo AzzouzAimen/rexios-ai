@@ -41,13 +41,17 @@ Interface: POST `/api/ai/platform-chat/stream`, request `{message,history?,lang,
 
 Files: `src/api/platformChat.ts`, `src/hooks/usePlatformChat.ts`, `src/components/PlatformChat.tsx`, `src/App.tsx`, `src/data/policies.ts`, `docs/PLATFORM-CHAT.md`.
 
-- [ ] Add chat client/hook with completed-turn history, smooth previews, safe resource buttons, cancel/retry/clear, account-reset and unmount cleanup.
-- [ ] Add responsive global launcher/panel and role-aware starters in the existing theme; disclose AI status and memory/privacy behavior briefly.
-- [ ] Update privacy copy for chat processing and document guide maintenance, local testing and architecture sources.
-- [ ] Build/lint, run regression coverage, live-test normal/Arabic/follow-up/refusal/unsupported questions, review changes and commit.
+- [x] Add chat client/hook with completed-turn history, smooth previews, safe resource buttons, cancel/retry/clear, account-reset and unmount cleanup.
+- [x] Add responsive global launcher/panel and role-aware starters in the existing theme; disclose AI status and memory/privacy behavior briefly.
+- [x] Update privacy copy for chat processing and document guide maintenance, local testing and architecture sources.
+- [x] Build/lint, run regression coverage, live-test normal/Arabic/follow-up/refusal/unsupported questions, review changes and commit.
 
 ## Progress
 
 - Design and plan prepared from current routes, permissions and existing streaming code. Implementation authorized by the user's request.
 - Task 1 complete: five focused tests pass; backend build passes and `dist/ai/knowledge/platform-guide.json` exists. The guide covers 18 public product topics and the prompt includes nine positive/refusal/uncertainty examples.
 - Task 2 complete: backend build and five HTTP tests pass. Public streams include previews and validated source buttons; account context uses role only; invalid/forged requests never invoke inference and safe errors omit provider diagnostics.
+- Task 3 complete: shared SmoothText/ShinyText components used in the global Ask Rexios panel. Stop/retry/new chat and account/unmount sequence guards preserve coherent history; only completed exchanges enter context. UI message IDs use a local sequence without requiring browser cryptography. Privacy copy and `docs/PLATFORM-CHAT.md` describe data flow, maintenance and demo prompts.
+- Verification: both builds pass; lint has zero errors and the same four existing warnings; full regression suite 106/106 passes. After final configuration/test tightening, the focused chat suite passes 10/10, including cancellation during streaming. Six live Gemma calls verify English, Arabic, follow-up, off-topic redirection, prompt-override refusal and unsupported-capability handling. No browser use or downloads.
+- Author review: checked knowledge against profile completeness, application/decision permissions and current routes; reviewed safe link resolution, history roles, stream repairs/cancellation, account reset, plain-text rendering and JSON build asset inclusion. No subagents used, following the user's preference.
+- Local API restarted with the final build. No GitHub push or VPS deployment performed.

@@ -24,6 +24,7 @@ import { CompanyApplicationsPage } from './pages/CompanyApplicationsPage';
 import { MyApplicationsPage } from './pages/MyApplicationsPage';
 import { PolicyPage } from './pages/PolicyPage';
 import { SupportPage } from './pages/SupportPage';
+import { PlatformChat } from './components/PlatformChat';
 
 export const App: React.FC = () => {
   return (
@@ -59,6 +60,7 @@ export const App: React.FC = () => {
           </main>
           <Footer />
           <AuthPromptModal />
+          <PlatformChat />
         </div>
       </BrowserRouter>
     </AppProvider>
