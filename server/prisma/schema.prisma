@@ -57,6 +57,35 @@ model User {
   questionReactions CommunityQuestionReaction[]
   answerReactions CommunityAnswerReaction[]
   notifications Notification[] @relation("NotificationRecipient")
+  contentReports ContentReport[]
+}
+
+model SupportRequest {
+  id String @id @default(uuid())
+  name String
+  email String
+  topic String
+  message String
+  language String
+  status String @default("OPEN")
+  createdAt DateTime @default(now())
+  @@index([status, createdAt])
+}
+
+model ContentReport {
+  id String @id @default(uuid())
+  reporterUserId String
+  reporter User @relation(fields: [reporterUserId], references: [id], onDelete: Cascade)
+  targetType String
+  targetId String
+  targetPath String
+  reason String
+  details String @default("")
+  language String
+  status String @default("OPEN")
+  createdAt DateTime @default(now())
+  @@unique([reporterUserId, targetType, targetId])
+  @@index([status, createdAt])
 }
 
 model TalentProfile {
