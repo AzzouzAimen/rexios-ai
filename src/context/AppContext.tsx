@@ -68,6 +68,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [currentUser, setCurrentUser] = useState<User>(GUEST_USER);
   const [currentRole, setCurrentRole] = useState<UserRole>('visitor');
   const [authLoading, setAuthLoading] = useState(true);
+  const [authConnectionError, setAuthConnectionError] = useState(false);
+  const [authRetrying, setAuthRetrying] = useState(false);
   const [problems, setProblems] = useState<Problem[]>([]);
   const [problemsLoading, setProblemsLoading] = useState(true);
   const [problemsError, setProblemsError] = useState('');
@@ -104,6 +106,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     try {
       const user = mapApiUser(await getCurrentUser());
       if (sequence !== authRefreshSequence.current) return;
+      setAuthConnectionError(false);
       const identityChanged = currentRole === 'visitor' || user.id !== currentUser.id;
       setSignedInIdentity(user);
       if (identityChanged) {
@@ -117,7 +120,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       }
     } catch (error) {
       if (sequence !== authRefreshSequence.current) return;
-      if (!(error instanceof ApiError) || (error.status !== 401 && error.status !== 404)) throw error;
+      if (!(error instanceof ApiError) || error.status !== 401) {
+        setAuthConnectionError(true);
+        return;
+      }
+      setAuthConnectionError(false);
       setSignedInIdentity(GUEST_USER); setSubmissions([]); setIsAuthModalOpen(false);
     } finally { if (sequence === authRefreshSequence.current) setAuthLoading(false); }
   }, [currentRole, currentUser.id]);
@@ -154,13 +161,19 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       ]);
       if (!mounted || sequence !== authRefreshSequence.current) return;
       if (userResult.status === 'fulfilled') {
+        setAuthConnectionError(false);
         const user = mapApiUser(userResult.value);
         setSignedInIdentity(user);
         if (user.role !== 'company') {
           const apps = await listMyApplications().catch(() => null);
           if (mounted && apps && currentUserIdRef.current === user.id) setSubmissions(apps.items.map(mapApplication));
         }
-      } else { setSignedInIdentity(GUEST_USER); }
+      } else if (userResult.reason instanceof ApiError && userResult.reason.status === 401) {
+        setSignedInIdentity(GUEST_USER);
+        setAuthConnectionError(false);
+      } else {
+        setAuthConnectionError(true);
+      }
       if (problemResult.status === 'fulfilled') setProblems(problemResult.value.items.map(mapApiProblem));
       else {
         setProblems([]);
@@ -175,6 +188,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const setSignedInUser = (raw: User) => {
     const user = mapApiUser(raw);
     authRefreshSequence.current++;
+    setAuthConnectionError(false);
     setSignedInIdentity(user); setSubmissions([]); setAuthLoading(false);
     void refreshProblems();
     if (user.role !== 'company') {
@@ -194,6 +208,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     try { await logoutRequest(); }
     finally {
       authRefreshSequence.current++;
+      setAuthConnectionError(false);
       setSignedInIdentity(GUEST_USER); setSubmissions([]); setProblems([]);
       void refreshProblems();
     }
@@ -317,7 +332,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     submissions, refreshApplications, saveApplicationDraft, submitApplication, calculateEligibility,
     isAuthModalOpen, openAuthModal: () => setIsAuthModalOpen(true), closeAuthModal: () => setIsAuthModalOpen(false),
   };
-  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+  return <AppContext.Provider value={value}>
+    {authConnectionError && <div role="alert" dir={dir} className="card-pixel m-4 p-5 text-sm space-y-3">
+      <p>{lang === 'ar' ? 'تعذر التحقق من جلسة الحساب بسبب مشكلة اتصال. أعد المحاولة لاستعادة الوصول.' : 'We could not check your session because of a connection problem. Try again to restore access.'}</p>
+      <button type="button" disabled={authRetrying} className="btn-pixel-secondary px-4 py-2 rounded text-xs font-bold disabled:opacity-50" onClick={async () => { setAuthRetrying(true); try { await refreshAuth(); } finally { setAuthRetrying(false); } }}>{lang === 'ar' ? 'إعادة المحاولة' : 'Try again'}</button>
+    </div>}
+    {!(authConnectionError && currentRole === 'visitor') && children}
+  </AppContext.Provider>;
 };
 
 export const useApp = () => {
