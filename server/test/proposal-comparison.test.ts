@@ -54,6 +54,11 @@ test('graph respects cancellation and transport failures without automatic repai
   const controller = new AbortController(); controller.abort();
   await assert.rejects(compareProposals(context, 'ar', { async complete() { calls++; return valid; } }, { signal: controller.signal, maxRepairs: 2, progress() {} }));
   assert.equal(calls, 1);
+  const during = new AbortController();
+  await assert.rejects(compareProposals(context, 'en', {
+    async complete() { throw new Error('Must stream'); },
+    async *stream() { yield valid.slice(0, 20); during.abort(); yield valid.slice(20); },
+  }, { signal: during.signal, maxRepairs: 2, progress() {} }));
 });
 
 test('service requires company ownership, sanitizes input, and reports outdated comparisons', async () => {

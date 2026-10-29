@@ -99,6 +99,19 @@ test('proposal comparison HTTP workflow preserves ownership, persistence, pagina
       assert.equal((await owner(path)).data.canCompare, false);
       const closed = await owner(`${path}/stream`, 'POST', { lang: 'en' }); assert.equal(closed.data.at(-1).status, 409);
     });
+    await t.test('dedicated demo seed preserves edited text and decisions on repeat runs', async () => {
+      const { seedProposalDemo, proposalDemoId } = await import('../scripts/seed-proposal-demo');
+      if (!await db.user.findUnique({ where: { email: 'c@demo.test' } })) await db.user.create({ data: { email: 'c@demo.test', displayName: 'Demo company', displayNameEn: 'Demo company', passwordHash: 'unused', role: 'COMPANY' } });
+      await seedProposalDemo(db);
+      const original = await db.application.findUniqueOrThrow({ where: { id: 'demo-comparison-application-1' } });
+      try {
+        await db.application.update({ where: { id: original.id }, data: { coverMessage: 'Edited by owner of test fixture', status: 'REJECTED' } });
+        await seedProposalDemo(db);
+        const after = await db.application.findUniqueOrThrow({ where: { id: original.id } });
+        assert.equal(after.coverMessage, 'Edited by owner of test fixture'); assert.equal(after.status, 'REJECTED');
+        assert.equal(await db.application.count({ where: { problemId: proposalDemoId } }), 4);
+      } finally { await db.application.update({ where: { id: original.id }, data: { coverMessage: original.coverMessage, status: original.status } }); }
+    });
   } finally {
     if (app) await app.close(); if (pool) await pool.end();
     await new Promise<void>(resolve => inference.close(() => resolve()));

@@ -35,7 +35,7 @@ export function ProposalComparisonPanel({ ai, lang, order, onOrder, onRun, disab
       const reason = ai.preview[`entries.${index}.reason.${lang}`];
       return reason ? <div key={`${index}:${lang}`} className="border-t border-[#C9D3FF] pt-3 text-xs space-y-1"><p className="font-semibold">{candidate ? ar ? candidate.name : candidate.nameEn : ar ? 'تفسير المقترح' : 'Proposal explanation'}</p><SmoothText text={reason} streaming /></div> : null;
     })}
-    {fresh && !ai.loading && <div className="flex flex-wrap items-center gap-2" role="group" aria-label={ar ? 'ترتيب المقترحات' : 'Proposal order'}>{(['ai', 'newest'] as const).map(value => <button type="button" disabled={disabled} key={value} aria-pressed={order === value} onClick={() => onOrder(value)} className={`${button} ${order === value ? 'bg-[#0B2A9E] text-[#FFFBF1]' : ''}`}>{value === 'ai' ? (ar ? 'أولوية الذكاء الاصطناعي · قيد المراجعة' : 'AI priority · Pending') : (ar ? 'الأحدث · جميع المقترحات' : 'Newest · All proposals')}</button>)}</div>}
+    {fresh && !ai.loading && <div className="flex flex-wrap items-center gap-2" role="group" aria-label={ar ? 'ترتيب المقترحات' : 'Proposal order'}>{(['ai', 'newest'] as const).map(value => <button type="button" disabled={disabled} key={value} aria-pressed={order === value} onClick={() => onOrder(value)} style={order === value ? { backgroundColor: '#0B2A9E', color: '#FFFBF1' } : undefined} className={button}>{value === 'ai' ? (ar ? 'أولوية الذكاء الاصطناعي · قيد المراجعة' : 'AI priority · Pending') : (ar ? 'الأحدث · جميع المقترحات' : 'Newest · All proposals')}</button>)}</div>}
   </section>;
 }
 

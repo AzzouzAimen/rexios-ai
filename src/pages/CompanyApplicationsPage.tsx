@@ -64,6 +64,10 @@ const CompanyApplicationsContent: React.FC = () => {
   const runComparison = async () => {
     const state = await ai.run();
     if (state && !state.stale && state.canCompare) { setOrder('ai'); await load(1, false, true, 'ai'); }
+    else {
+      const latest = await refreshComparison(true);
+      if (latest && (latest.stale || !latest.canCompare)) setOrder('newest');
+    }
   };
 
   const decide = async (applicationId: string, decision: 'ACCEPTED' | 'REJECTED') => {

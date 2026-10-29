@@ -15,14 +15,14 @@ export function useProposalComparison(id: string, lang: Language) {
   const controller = useRef<AbortController | null>(null);
   const language = useRef(lang);
   useEffect(() => { language.current = lang; }, [lang]);
-  const refresh = useCallback(async () => {
+  const refresh = useCallback(async (keepError = false) => {
     if (controller.current) return null;
     const current = ++sequence.current;
     setChecking(true);
     try {
       const state = await getProposalComparison(id);
       if (current !== sequence.current) return null;
-      setSaved(state); setCandidates(state.candidates); setError(''); return state;
+      setSaved(state); setCandidates(state.candidates); if (!keepError) setError(''); return state;
     } catch (reason) {
       if (current === sequence.current) setError(apiErrorMessage(reason, language.current));
       return null;
