@@ -33,9 +33,9 @@ Files: `server/src/ai/platform-chat.controller.ts`, `server/src/main.ts`, `serve
 
 Interface: POST `/api/ai/platform-chat/stream`, request `{message,history?,lang,page?}`; SSE preview `{type:'preview',answer}`, phase `{type:'phase',phase,attempt}`; complete `{type:'complete',result:{answer,resources:[{id,title,path}]}}`.
 
-- [ ] Test public access, invalid input before inference, session-derived role, safe errors and no domain writes against local inference stubs.
-- [ ] Register controller, normalize page context, pass only account type, handle disconnect/timeout/heartbeat and safe terminal errors.
-- [ ] Build API, run focused HTTP tests, commit.
+- [x] Test public access, invalid input before inference, session-derived role, safe errors and no domain writes against local inference stubs.
+- [x] Register controller, normalize page context, pass only account type, handle disconnect/timeout/heartbeat and safe terminal errors.
+- [x] Build API, run focused HTTP tests, commit.
 
 ### Task 3: Chat panel and handoff
 
@@ -50,3 +50,4 @@ Files: `src/api/platformChat.ts`, `src/hooks/usePlatformChat.ts`, `src/component
 
 - Design and plan prepared from current routes, permissions and existing streaming code. Implementation authorized by the user's request.
 - Task 1 complete: five focused tests pass; backend build passes and `dist/ai/knowledge/platform-guide.json` exists. The guide covers 18 public product topics and the prompt includes nine positive/refusal/uncertainty examples.
+- Task 2 complete: backend build and five HTTP tests pass. Public streams include previews and validated source buttons; account context uses role only; invalid/forged requests never invoke inference and safe errors omit provider diagnostics.

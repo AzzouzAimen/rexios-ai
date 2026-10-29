@@ -30,13 +30,14 @@ import { ChallengeBriefService } from './ai/challenge-brief.service';
 import { ProposalComparisonController } from './ai/proposal-comparison.controller';
 import { ProposalComparisonService } from './ai/proposal-comparison.service';
 import { SupportController, ReportsController } from './support/support.controller';
+import { PlatformChatController } from './ai/platform-chat.controller';
 
 @Controller('health')
 class HealthController {
   constructor(private readonly db: PrismaService) {}
   @Get() async health() { await this.db.$queryRaw`SELECT 1`; return { status: 'ok' }; }
 }
-@Module({ imports: [DatabaseModule], controllers: [HealthController, AuthController, ProfilesController, ProblemsController, CompanyProblemsController, ApplicationsController, CommentsController, FilesController, CommunityController, MetaController, NotificationsController, PublicController, ChallengeBriefController, ProposalComparisonController, SupportController, ReportsController], providers: [AuthService, SessionGuard, ProblemsService, ApplicationsService, FilesService, CommunityService, NotificationsService, PublicService, ChallengeBriefService, ProposalComparisonService] })
+@Module({ imports: [DatabaseModule], controllers: [HealthController, AuthController, ProfilesController, ProblemsController, CompanyProblemsController, ApplicationsController, CommentsController, FilesController, CommunityController, MetaController, NotificationsController, PublicController, ChallengeBriefController, ProposalComparisonController, SupportController, ReportsController, PlatformChatController], providers: [AuthService, SessionGuard, ProblemsService, ApplicationsService, FilesService, CommunityService, NotificationsService, PublicService, ChallengeBriefService, ProposalComparisonService] })
 class AppModule {}
 
 export async function bootstrap(port = Number(process.env.PORT || 3000)) {
