@@ -1,4 +1,5 @@
 import { briefDraftSchema, type BriefDraft, type BriefField, type BriefResult } from './challenge-brief.schema';
+import { decodeStringPrefix } from './json-text-preview';
 
 export type BriefProgress =
   | { type: 'phase'; phase: 'drafting' | 'checking' | 'repairing'; attempt: number }
@@ -11,23 +12,6 @@ type Frame = { kind: 'object' | 'array'; path: string[]; start: number; key?: st
 const textFields = new Set(['title', 'titleEn', 'summary', 'summaryEn', 'description', 'descriptionEn']);
 const listFields = new Set(['deliverables', 'deliverablesEn', 'constraints', 'constraintsEn', 'criteria', 'criteriaEn']);
 
-/** Decode only a complete prefix, withholding split escapes and surrogate pairs. */
-function stringPrefix(raw: string): string | null {
-  let end = 0;
-  for (let i = 0; i < raw.length; i++) {
-    if (raw[i] === '\\') {
-      if (i + 1 >= raw.length) break;
-      if (raw[i + 1] === 'u') {
-        if (i + 6 > raw.length) break;
-        i += 5;
-      } else i++;
-    }
-    end = i + 1;
-  }
-  try {
-    return (JSON.parse(`"${raw.slice(0, end)}"`) as string).replace(/[\uD800-\uDBFF]$/, '');
-  } catch { return null; }
-}
 
 /** Text prefixes are provisional; other fields pass their individual schemas.
  * Never repair/execute partial JSON. Only full validation makes a draft usable.
@@ -122,7 +106,7 @@ export class BriefPreviewParser {
     }
     if (this.stringStart !== null && !this.isKey) {
       const parent = this.frames.at(-1);
-      const prefix = stringPrefix(this.buffer.slice(this.stringStart + 1));
+      const prefix = decodeStringPrefix(this.buffer.slice(this.stringStart + 1));
       if (prefix && parent?.path[0] === 'draft') {
         if (parent.path.length === 1 && parent.key && textFields.has(parent.key)) emit(parent.key, prefix);
         else if (parent.kind === 'array' && parent.path.length === 2 && listFields.has(parent.path[1])) {

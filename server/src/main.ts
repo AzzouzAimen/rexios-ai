@@ -27,13 +27,15 @@ import { PublicService } from './public/public.service';
 import { loadAiEnvironment } from './ai/ai.environment';
 import { ChallengeBriefController } from './ai/challenge-brief.controller';
 import { ChallengeBriefService } from './ai/challenge-brief.service';
+import { ProposalComparisonController } from './ai/proposal-comparison.controller';
+import { ProposalComparisonService } from './ai/proposal-comparison.service';
 
 @Controller('health')
 class HealthController {
   constructor(private readonly db: PrismaService) {}
   @Get() async health() { await this.db.$queryRaw`SELECT 1`; return { status: 'ok' }; }
 }
-@Module({ imports: [DatabaseModule], controllers: [HealthController, AuthController, ProfilesController, ProblemsController, CompanyProblemsController, ApplicationsController, CommentsController, FilesController, CommunityController, MetaController, NotificationsController, PublicController, ChallengeBriefController], providers: [AuthService, SessionGuard, ProblemsService, ApplicationsService, FilesService, CommunityService, NotificationsService, PublicService, ChallengeBriefService] })
+@Module({ imports: [DatabaseModule], controllers: [HealthController, AuthController, ProfilesController, ProblemsController, CompanyProblemsController, ApplicationsController, CommentsController, FilesController, CommunityController, MetaController, NotificationsController, PublicController, ChallengeBriefController, ProposalComparisonController], providers: [AuthService, SessionGuard, ProblemsService, ApplicationsService, FilesService, CommunityService, NotificationsService, PublicService, ChallengeBriefService, ProposalComparisonService] })
 class AppModule {}
 
 export async function bootstrap(port = Number(process.env.PORT || 3000)) {

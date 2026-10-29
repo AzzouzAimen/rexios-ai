@@ -112,6 +112,7 @@ model Problem {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   privateDetails ProblemPrivateDetails?
+  proposalComparison ProposalComparison?
   applications Application[] @relation("ProblemApplications")
   acceptedApplicationId String? @unique
   acceptedApplication Application? @relation("SelectedApplication", fields: [acceptedApplicationId], references: [id])
@@ -127,6 +128,15 @@ model ProblemPrivateDetails {
   problem Problem @relation(fields: [problemId], references: [id])
   notes String @default("")
   notesEn String @default("")
+}
+
+model ProposalComparison {
+  problemId String @id
+  problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  fingerprint String
+  result Json
+  model String
+  generatedAt DateTime @default(now())
 }
 
 model Application {

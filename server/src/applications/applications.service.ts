@@ -6,6 +6,7 @@ import { requireRole } from '../common/http';
 import { presentUser, profileCompleteness } from '../common/present-user';
 import { ListDto } from '../problems/problem.dto';
 import { NotificationsService } from '../notifications/notifications.service';
+import { ProposalComparisonService } from '../ai/proposal-comparison.service';
 
 export class ApplicationDto {
   @IsOptional() @IsString() @Length(0, 20000) coverMessage?: string;
@@ -16,6 +17,9 @@ export class ApplicationDto {
 export class DecisionDto {
   @IsIn(['ACCEPTED', 'REJECTED']) decision!: 'ACCEPTED' | 'REJECTED';
   @IsOptional() @IsString() @Length(0, 2000) reason?: string;
+}
+export class CompanyApplicationListDto extends ListDto {
+  @IsOptional() @IsIn(['newest', 'ai']) order?: 'newest' | 'ai';
 }
 const applicationInclude = {
   problem: { select: { id: true, title: true, titleEn: true, status: true } },
@@ -29,7 +33,7 @@ function presentApplication(a: LoadedApplication) {
 
 @Injectable()
 export class ApplicationsService {
-  constructor(private readonly db: PrismaService, private readonly notifications: NotificationsService) {}
+  constructor(private readonly db: PrismaService, private readonly notifications: NotificationsService, private readonly comparison: ProposalComparisonService) {}
   async save(user: Account, id: string, input: ApplicationDto, submit: boolean) {
     requireRole(user, 'TALENT');
     if (submit && profileCompleteness(user.talent) !== 100) throw new BadRequestException('Complete your solver profile before applying.');
@@ -53,10 +57,18 @@ export class ApplicationsService {
     requireRole(user, 'TALENT');
     return this.list({ applicantUserId: user.id }, query);
   }
-  async forCompany(user: Account, id: string, query: ListDto) {
+  async forCompany(user: Account, id: string, query: CompanyApplicationListDto) {
     requireRole(user, 'COMPANY');
     const problem = await this.db.problem.findFirst({ where: { id, companyUserId: user.id } });
     if (!problem) throw new NotFoundException();
+    if (query.order === 'ai') {
+      const ids = await this.comparison.priorityIds(user, id);
+      const pending = await this.db.application.findMany({ where: { problemId: id, status: 'UNDER_REVIEW' }, include: applicationInclude });
+      const byId = new Map(pending.map(a => [a.id, a]));
+      if (pending.length !== ids.length || ids.some(key => !byId.has(key))) throw new ConflictException('The comparison needs refreshing.');
+      const ordered = ids.map(key => byId.get(key)!);
+      return { items: ordered.slice((query.page - 1) * query.limit, query.page * query.limit).map(presentApplication), total: ordered.length, page: query.page, limit: query.limit };
+    }
     return this.list({ problemId: id, status: { not: 'DRAFT' } }, query);
   }
   private async list(where: Prisma.ApplicationWhereInput, query: ListDto) {
