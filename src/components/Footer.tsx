@@ -24,7 +24,8 @@ export const Footer: React.FC = () => {
             : '© 2026 Rexios AI — Where tech skills meet real problems. Thirduni graduation initiative.'}
         </p>
 
-        <div className="flex items-center gap-4 text-xs font-semibold text-[#12122B]">
+        <div className="flex flex-col gap-4 text-xs font-semibold text-[#12122B]">
+        <nav aria-label={lang === 'ar' ? 'روابط المنصة' : 'Platform links'} className="flex flex-wrap justify-center md:justify-end gap-x-4 gap-y-3">
           <Link to="/" className="hover:underline">
             {lang === 'ar' ? 'الرئيسية' : 'Home'}
           </Link>
@@ -37,6 +38,12 @@ export const Footer: React.FC = () => {
           <Link to="/about" className="hover:underline">
             {lang === 'ar' ? 'عن المنصة' : 'About'}
           </Link>
+        </nav>
+        <nav aria-label={lang === 'ar' ? 'السياسات والدعم' : 'Policies and support'} className="flex flex-wrap justify-center md:justify-end gap-x-4 gap-y-3 text-[#5B5B7B]">
+          <Link to="/terms" className="hover:underline">{lang === 'ar' ? 'شروط الاستخدام' : 'Terms of Use'}</Link>
+          <Link to="/privacy" className="hover:underline">{lang === 'ar' ? 'سياسة الخصوصية' : 'Privacy Policy'}</Link>
+          <Link to="/support" className="hover:underline">{lang === 'ar' ? 'التواصل والدعم' : 'Contact & Support'}</Link>
+        </nav>
         </div>
       </div>
     </footer>

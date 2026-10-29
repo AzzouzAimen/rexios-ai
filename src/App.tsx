@@ -22,6 +22,8 @@ import { CompanyProblemFormPage } from './pages/CompanyProblemFormPage';
 import { CompanyProblemsPage } from './pages/CompanyProblemsPage';
 import { CompanyApplicationsPage } from './pages/CompanyApplicationsPage';
 import { MyApplicationsPage } from './pages/MyApplicationsPage';
+import { PolicyPage } from './pages/PolicyPage';
+import { SupportPage } from './pages/SupportPage';
 
 export const App: React.FC = () => {
   return (
@@ -48,6 +50,10 @@ export const App: React.FC = () => {
               <Route path="/company/problems/:id/edit" element={<RequireAuth account="COMPANY"><CompanyProblemFormPage /></RequireAuth>} />
               <Route path="/company/problems/:id/applications" element={<RequireAuth account="COMPANY"><CompanyApplicationsPage /></RequireAuth>} />
               <Route path="/about" element={<AboutPage />} />
+              <Route path="/terms" element={<PolicyPage kind="terms" />} />
+              <Route path="/privacy" element={<PolicyPage kind="privacy" />} />
+              <Route path="/support" element={<SupportPage />} />
+              <Route path="/contact" element={<Navigate to="/support" replace />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </main>

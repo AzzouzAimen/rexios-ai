@@ -247,9 +247,10 @@ export const SignUpPage: React.FC = () => {
                   className="mt-0.5 accent-[#0B2A9E]"
                 />
                 <span className="text-xs text-[#5B5B7B]">
-                  {lang === 'ar'
-                    ? 'أوافق على شروط الاستخدام وسياسة الخصوصية'
-                    : 'I agree to the Terms of Service and Privacy Policy'}
+                  {lang === 'ar' ? 'أوافق على ' : 'I agree to the '}
+                  <Link to="/terms" target="_blank" rel="noopener noreferrer" className="text-[#0B2A9E] underline">{lang === 'ar' ? 'شروط الاستخدام' : 'Terms of Use'}</Link>
+                  {lang === 'ar' ? ' و' : ' and '}
+                  <Link to="/privacy" target="_blank" rel="noopener noreferrer" className="text-[#0B2A9E] underline">{lang === 'ar' ? 'سياسة الخصوصية' : 'Privacy Policy'}</Link>
                 </span>
               </label>
 

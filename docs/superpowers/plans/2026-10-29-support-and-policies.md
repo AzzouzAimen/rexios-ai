@@ -41,9 +41,9 @@
 
 **Interfaces:** Public `/terms`, `/privacy`, `/support`; localized structured article data. `sendSupportRequest(input)` returns `{reference}`.
 
-- [ ] Add shared page framing and bilingual policy content aligned with implemented functionality.
-- [ ] Add support form with required fields, pending/error/success/reference states and privacy link.
-- [ ] Connect routes, footer links and signup terms links; build frontend and commit.
+- [x] Add shared page framing and bilingual policy content aligned with implemented functionality.
+- [x] Add support form with required fields, pending/error/success/reference states and privacy link.
+- [x] Connect routes, footer links and signup terms links; build frontend and commit.
 
 ### Task 3: Integrate reporting and verify
 
@@ -59,3 +59,4 @@
 
 - Planning complete; implementation authorized by the current user request.
 - Task 1 complete: API build passes; local additive migration applied; support integration test passes 5/5. Test fixtures corrected to follow existing registration password requirements and list-valued challenge requirements. No runtime behavior changes beyond the plan.
+- Task 2 complete: frontend build passes. Public policy/support routes, footer and signup links wired; contact alias redirects to support. Policy factual edits documented in the design.
