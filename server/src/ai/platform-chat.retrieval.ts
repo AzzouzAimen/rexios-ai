@@ -19,10 +19,19 @@ export async function retrieveChatKnowledge(input: ChatRequest, model: Embedding
   // Similarity is relevance, not a security boundary or a probability.
   const floor = Math.max(0.4, (ranked[0]?.score || 0) - 0.15);
   const ids = ranked.filter(row => row.score >= floor).slice(0, 4).map(row => row.id);
-  // Applying depends on profile completeness; include its exact requirements.
-  if (ids.includes('applying') && !ids.includes('profile')) {
-    if (ids.length === 4) ids.splice(ids.findLastIndex(id => id !== 'applying'), 1);
-    ids.push('profile');
+  // Preserve the leading match and small workflow dependencies. Vague follow-ups
+  // need the next step as well as the original topic (e.g. applying -> tracking).
+  const required = new Set(ids.slice(0, 1));
+  const include = (id: string) => {
+    required.add(id);
+    if (ids.includes(id)) return;
+    if (ids.length === 4) ids.splice(ids.findLastIndex(value => !required.has(value)), 1);
+    ids.push(id);
+  };
+  if (retrievalQuestion(input) !== input.message) {
+    const next: Record<string, string> = { applying: 'applications', 'ai-brief': 'posting', 'ai-comparison': 'review' };
+    if (next[ids[0]]) include(next[ids[0]]);
   }
+  if (ids.includes('applying')) include('profile');
   return ids.map(id => chatGuide.sections.find(section => section.id === id)!);
 }

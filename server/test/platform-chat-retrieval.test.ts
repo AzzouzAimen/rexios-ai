@@ -32,3 +32,12 @@ test('follow-up retrieval carries the previous question but an explicit topic ch
   const arabic = retrievalQuestion(parseChatRequest({ message: 'وماذا بعد ذلك؟', lang: 'ar', history }));
   assert.ok(arabic.includes(history[0].content));
 });
+
+test('an application follow-up includes tracking facts so its next-step link can be correct', async () => {
+  const index = buildGuideIndex(chatGuide.sections.map(section => section.id === 'applying' ? [1, 0] : [0, 1]), 'test/embed');
+  const input = parseChatRequest({ message: 'Where do I check it afterwards?', lang: 'en', history: [{ role: 'user', content: 'How can I put myself forward to solve a company problem?' }, { role: 'assistant', content: 'Complete your profile and submit a proposal.' }] });
+  const selected = await retrieveChatKnowledge(input, { model: 'test/embed', embed: async () => [[1, 0]] }, new AbortController().signal, index);
+  assert.ok(selected.some(section => section.id === 'applications'));
+  assert.ok(selected.some(section => section.id === 'profile'));
+  assert.ok(selected.length <= 4);
+});
