@@ -11,8 +11,8 @@ export const submitApplication = async (problemId: string, input: ApplicationInp
 };
 export const listMyApplications = (page = 1, limit = 50) =>
   apiRequest<Page<ApiApplication>>(`/me/applications?page=${page}&limit=${limit}`);
-export const listCompanyApplications = (problemId: string, page = 1, limit = 50) =>
-  apiRequest<Page<ApiApplication>>(`/company/problems/${encodeURIComponent(problemId)}/applications?page=${page}&limit=${limit}`);
+export const listCompanyApplications = (problemId: string, page = 1, limit = 50, order: 'newest' | 'ai' = 'newest') =>
+  apiRequest<Page<ApiApplication>>(`/company/problems/${encodeURIComponent(problemId)}/applications?page=${page}&limit=${limit}&order=${order}`);
 export const decideApplication = async (id: string, decision: 'ACCEPTED' | 'REJECTED', reason?: string) => {
   const application = await apiRequest<ApiApplication>(`/applications/${encodeURIComponent(id)}/decision`, {
     method: 'POST',
