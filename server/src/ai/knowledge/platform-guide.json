@@ -1,0 +1,146 @@
+{
+  "version": "2026-10-29",
+  "purpose": "Authoritative public product guide for Ask Rexios. Describes implemented MVP behavior, not live account data or a future roadmap.",
+  "sections": [
+    {
+      "id": "overview", "title": { "en": "About Rexios", "ar": "عن Rexios" }, "path": "/about",
+      "facts": [
+        "Rexios AI is a platform connecting technical talent with companies through engineering challenges, private proposals and an open technical community. The community is one part of the platform.",
+        "Companies describe problems, budget and expected results. Talent proposes an approach and delivery time. Companies manually review and select an applicant.",
+        "The MVP facilitates introductions and review. It does not process payments, hold escrow, enforce contracts, verify qualifications or execute engineering solutions."
+      ]
+    },
+    {
+      "id": "accounts", "title": { "en": "Create an account", "ar": "إنشاء حساب" }, "path": "/signup",
+      "facts": [
+        "Choose a Talent or Company account at signup. Terms intend users to be 18+ and company representatives to be authorized. Commercial registration and academic credentials are not systematically verified.",
+        "Talent with an incomplete profile appears as a member; a complete talent profile appears as a solver. These are two states of a TALENT account, not two separate registrations.",
+        "Signed-in companies visiting Home go to My Challenges; complete talent goes to Challenges and incomplete talent goes to Community. Visitors see the public landing page.",
+        "Both talent and company accounts can participate in the public community. A company account posts challenges, while a talent account submits proposals."
+      ]
+    },
+    {
+      "id": "signin", "title": { "en": "Sign in", "ar": "تسجيل الدخول" }, "path": "/signin",
+      "facts": [
+        "Sign in with email and password. Use the profile/sidebar logout action to change accounts. Language is switched from the navigation bar/sidebar.",
+        "Google sign-in and password recovery controls are placeholders in this MVP. They do not perform Google OAuth or send recovery emails. For account help use Contact & Support; the chatbot cannot reset passwords.",
+        "If your session has expired, sign in again. If a connection error prevents session checking, use the retry action and check connectivity. Never share a password, session cookie or API key in chat."
+      ]
+    },
+    {
+      "id": "profile", "title": { "en": "Talent profile", "ar": "الملف التقني" }, "path": "/profile/solver",
+      "facts": [
+        "Before submitting a proposal, complete the talent profile to 100% and save it. Required: first name, last name, education level, institution/major, experience level, at least one technical skill, and at least one of CV, GitHub URL or LinkedIn URL.",
+        "A CV is not mandatory if a valid GitHub or LinkedIn link is provided. Skills are self-reported. Matching skills can be highlighted but a matching skill is not a hard application gate.",
+        "Profiles are filled in manually. Automatic CV parsing, AI profile creation and verified skill certification are not available. Company accounts cannot use the talent profile page or submit talent proposals."
+      ]
+    },
+    {
+      "id": "browsing", "title": { "en": "Browse challenges", "ar": "تصفح التحديات" }, "path": "/problems",
+      "facts": [
+        "Visitors can browse published challenges and open their details. Use keyword, skill and difficulty filters and available sorting controls to narrow the list. Draft challenges are private to their company.",
+        "A challenge shows its public description, company, technical requirements, deliverables, budget in Algerian dinars (DZD), application deadline, public attachments and discussion.",
+        "The deadline is when applications close, not the delivery duration. The chatbot has no live search or inventory of challenge titles, budgets or availability. Direct users to the feed instead of inventing a matching opportunity."
+      ]
+    },
+    {
+      "id": "applying", "title": { "en": "Find a challenge to apply", "ar": "اختر تحديًا للتقديم" }, "path": "/problems",
+      "facts": [
+        "As a talent account with a 100% profile, open a challenge that is still open and before its deadline, then use its proposal/application action.",
+        "Write a proposal of at least 10 words explaining your approach, set an estimated delivery time, optionally add a project link/files, confirm ownership/consent, then submit. You can save a draft first.",
+        "One submitted application per talent per challenge is allowed. A submitted proposal cannot be submitted again or edited through the draft flow. Submission is private to the applicant and reviewing company, not posted in the public discussion.",
+        "For a blocked submission, suggest checking account type, profile completeness, challenge status/deadline, prior submission, proposal length and the ownership checkbox. Ask which visible message the user sees if those checks do not explain it. Do not claim to have checked their account."
+      ]
+    },
+    {
+      "id": "applications", "title": { "en": "My Applications", "ar": "طلباتي" }, "path": "/my-applications",
+      "facts": [
+        "Talent can view drafts and submitted proposals in My Applications. Statuses include draft, under review, accepted and rejected; an optional rejection reason may appear.",
+        "Notifications announce relevant application decisions and activity. The bot cannot see whether a particular user was accepted, their application status or notifications. It can guide them to My Applications.",
+        "The company's selected applicant can access private notes/files for that challenge through its details. Selection is not a payment or employment guarantee."
+      ]
+    },
+    {
+      "id": "company", "title": { "en": "My Challenges", "ar": "تحدياتي" }, "path": "/company/problems",
+      "facts": [
+        "Companies use My Challenges for their dashboard, total/open challenge and proposal counts, drafts, published challenges and review actions.",
+        "Use Post a challenge to start a new challenge. Open an existing challenge's Review Proposals action to evaluate its submissions. The chatbot cannot read dashboard totals or edit/publish a challenge for the company."
+      ]
+    },
+    {
+      "id": "posting", "title": { "en": "Post a challenge", "ar": "نشر تحدٍ" }, "path": "/company/problems/new",
+      "facts": [
+        "Company accounts can post a bug, issue or challenge with title, summary, description, deliverables, constraints, evaluation criteria, skills, difficulty, DZD budget and application deadline. Save a draft or publish using the form.",
+        "Put public information in the public fields and sensitive material in private notes/files. Keep highly sensitive industrial data out of the demonstration environment.",
+        "Publishing requires meaningful title/summary/description, skills, a positive DZD budget and a future application deadline. Once applications arrive, or a challenge closes, its public brief is fixed; private details can still be managed by the company."
+      ]
+    },
+    {
+      "id": "review", "title": { "en": "Review company proposals", "ar": "مراجعة مقترحات الشركة" }, "path": "/company/problems",
+      "facts": [
+        "In My Challenges, choose Review Proposals for a challenge. Read submissions and their supporting links/files, then manually accept or reject. Rejection can include a reason.",
+        "Accepting selects one applicant and closes that challenge to further applications. Closing a challenge requires confirmation and rejects pending submissions. The bot cannot accept, reject, close or reopen anything.",
+        "The current chatbot has no access to private proposals, applicant identities or files. It cannot evaluate an actual submission from the database. Use the company's dedicated Compare with AI feature for proposal prioritization."
+      ]
+    },
+    {
+      "id": "ai-brief", "title": { "en": "AI challenge assistant", "ar": "مساعد صياغة التحديات" }, "path": "/company/problems/new",
+      "facts": [
+        "The company posting screen includes an AI challenge assistant. Describe the current problem, desired outcome and known constraints/budget/dates, generate a draft, answer clarification questions or request changes, and review Arabic/English previews.",
+        "Use this draft copies public fields into the normal posting form. Nothing is automatically published; the company reviews, edits and saves/publishes the form. Unknown budget or deadline can remain missing until supplied.",
+        "The assistant uses the configured Featherless model with LangChain/LangGraph, few-shot prompts, streamed text, output validation and repairs. It produces a structured brief rather than implementing a solution. Do not include confidential data in its input."
+      ]
+    },
+    {
+      "id": "ai-comparison", "title": { "en": "AI proposal comparison", "ar": "مقارنة المقترحات بالذكاء الاصطناعي" }, "path": "/company/problems",
+      "facts": [
+        "As the owning company, go to My Challenges, Review Proposals, then Compare with AI. A challenge must be open and have at least two pending/under-review proposals. Already decided proposals and drafts are excluded.",
+        "AI compares proposal text, delivery time and declared technical skills against public challenge requirements. It returns rank, fit labels, brief reasons, strengths, gaps and a useful follow-up question. No numerical score is shown.",
+        "Names, contact details, education, CVs and private challenge notes are excluded from structured comparison input. Personal information written inside proposal text may still be sent. Attachments and linked code are not verified or executed.",
+        "Explanations stream first; validated ranking then enables AI priority order. Newest order remains available. The latest result is saved and reused on reload; relevant changes mark it stale. AI does not automatically select anyone; accept/reject remains manual."
+      ]
+    },
+    {
+      "id": "community", "title": { "en": "Technical community", "ar": "المجتمع التقني" }, "path": "/community",
+      "facts": [
+        "The community is a public technical question-and-answer feed. Browse questions, search/filter by topic, read answers and use sorting. Both companies and talent can participate.",
+        "Signed-in users can ask questions, answer, and add Helpful or Insight reactions to other people's posts. A question's author can select an accepted answer. Community content is public, so do not post confidential specifications or full proprietary solutions.",
+        "The bot can explain how to use the community, but does not replace it with general programming, homework solving or off-platform technical consulting."
+      ]
+    },
+    {
+      "id": "ask", "title": { "en": "Ask the community", "ar": "اسأل المجتمع" }, "path": "/community/ask",
+      "facts": ["Sign in, choose Ask a question, add a clear technical title, context/body, relevant skill tags and optional code snippet, then post. For engineering/coding problems outside platform guidance, suggest asking the community instead of answering the technical problem in this chatbot."]
+    },
+    {
+      "id": "reporting", "title": { "en": "Reporting & help", "ar": "الإبلاغ والمساعدة" }, "path": "/support",
+      "facts": [
+        "Open the relevant public challenge, community question or answer and choose Report. Sign in if prompted, select a reason and optionally add context. Reasons include spam, abuse, confidentiality/rights, misleading content and other.",
+        "Reports are saved privately with a reference. Repeating a report for the same account/content returns the existing reference. Reporting does not automatically remove content or ban anyone. The team reviews reports manually. The bot cannot submit a report on the user's behalf."
+      ]
+    },
+    {
+      "id": "support", "title": { "en": "Contact & Support", "ar": "التواصل والدعم" }, "path": "/support",
+      "facts": [
+        "Visitors and signed-in users can use Contact & Support. Enter name, reply email, a topic and a message of at least 10 characters; submit to save a request and receive a reference number.",
+        "Topics are General question, Technical issue, Account help and Privacy & data. Requests are handled manually. No automatic email, live human chat, support status tracker or response-time guarantee is implemented. The chatbot cannot file, retrieve or change support tickets.",
+        "Never send passwords, API keys, session cookies or sensitive industrial files. If information is missing from this guide, state that and point to support rather than invent a policy or an email address."
+      ]
+    },
+    {
+      "id": "privacy", "title": { "en": "Privacy Policy", "ar": "سياسة الخصوصية" }, "path": "/privacy",
+      "facts": [
+        "The Privacy Policy explains account/profile data, public/private visibility, session cookies, browser language preference, support/report storage and external AI processing through Featherless.",
+        "For access, correction or deletion of account data, use Contact & Support and choose Privacy & data. Some profile fields can be edited directly. Do not promise automatic deletion, a retention period, blanket encryption or compliance certifications.",
+        "Ask Rexios sends the question, the last six completed chat exchanges, UI language, broad page category and account type to the configured Featherless model together with this public guide. It cannot read private records. Chat is kept in browser page memory, not saved in a chat database; refresh, New chat or account change clears it. Do not share sensitive information."
+      ]
+    },
+    {
+      "id": "terms", "title": { "en": "Terms of Use", "ar": "شروط الاستخدام" }, "path": "/terms",
+      "facts": [
+        "Enterprise data remains the enterprise's intellectual property. Solution rights, confidentiality agreements, payment and delivery terms are arranged directly by the company and candidate.",
+        "There is no in-app NDA signing, verified credential workflow, payment processing or automatic IP dispute resolution. Agree on required confidentiality terms directly before sharing private data. The bot can link to the terms but must not give legal advice."
+      ]
+    }
+  ]
+}
