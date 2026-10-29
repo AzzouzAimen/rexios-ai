@@ -4,6 +4,7 @@
   "sections": [
     {
       "id": "overview", "title": { "en": "About Rexios", "ar": "عن Rexios" }, "path": "/about",
+      "questions": ["What is Rexios AI and how does the platform work?", "ما هي منصة Rexios وما فائدتها للشركات والمواهب؟"],
       "facts": [
         "Rexios AI is a platform connecting technical talent with companies through engineering challenges, private proposals and an open technical community. The community is one part of the platform.",
         "Companies describe problems, budget and expected results. Talent proposes an approach and delivery time. Companies manually review and select an applicant.",
@@ -12,6 +13,7 @@
     },
     {
       "id": "accounts", "title": { "en": "Create an account", "ar": "إنشاء حساب" }, "path": "/signup",
+      "questions": ["Should I register as talent or a company? What is a member versus a solver?", "كيف أنشئ حسابًا؟ ما الفرق بين حساب الشركة والموهبة والعضو وخبير الحلول؟"],
       "facts": [
         "Choose a Talent or Company account at signup. Terms intend users to be 18+ and company representatives to be authorized. Commercial registration and academic credentials are not systematically verified.",
         "Talent with an incomplete profile appears as a member; a complete talent profile appears as a solver. These are two states of a TALENT account, not two separate registrations.",
@@ -21,6 +23,7 @@
     },
     {
       "id": "signin", "title": { "en": "Sign in", "ar": "تسجيل الدخول" }, "path": "/signin",
+      "questions": ["How do I log in or log out? Google sign-in is not working. Can I reset my password?", "كيف أسجل الدخول والخروج؟ لماذا لا يعمل زر جوجل أو استعادة كلمة المرور؟"],
       "facts": [
         "Sign in with email and password. Use the profile/sidebar logout action to change accounts. Language is switched from the navigation bar/sidebar.",
         "Google sign-in and password recovery controls are placeholders in this MVP. They do not perform Google OAuth or send recovery emails. For account help use Contact & Support; the chatbot cannot reset passwords.",
@@ -29,6 +32,7 @@
     },
     {
       "id": "profile", "title": { "en": "Talent profile", "ar": "الملف التقني" }, "path": "/profile/solver",
+      "questions": ["How do I complete my profile? Is uploading a CV required if I have GitHub or LinkedIn? Can AI parse my résumé?", "كيف أكمل ملفي التقني؟ هل السيرة الذاتية ضرورية أم يكفي رابط جيتهاب؟ هل تُقرأ سيرتي آليًا؟"],
       "facts": [
         "Before submitting a proposal, complete the talent profile to 100% and save it. Required: first name, last name, education level, institution/major, experience level, at least one technical skill, and at least one of CV, GitHub URL or LinkedIn URL.",
         "A CV is not mandatory if a valid GitHub or LinkedIn link is provided. Skills are self-reported. Matching skills can be highlighted but a matching skill is not a hard application gate.",
@@ -37,6 +41,7 @@
     },
     {
       "id": "browsing", "title": { "en": "Browse challenges", "ar": "تصفح التحديات" }, "path": "/problems",
+      "questions": ["Where can I find and filter available challenges by skills, difficulty or budget?", "أين أجد التحديات المفتوحة وكيف أبحث حسب المهارات والصعوبة؟"],
       "facts": [
         "Visitors can browse published challenges and open their details. Use keyword, skill and difficulty filters and available sorting controls to narrow the list. Draft challenges are private to their company.",
         "A challenge shows its public description, company, technical requirements, deliverables, budget in Algerian dinars (DZD), application deadline, public attachments and discussion.",
@@ -45,6 +50,7 @@
     },
     {
       "id": "applying", "title": { "en": "Find a challenge to apply", "ar": "اختر تحديًا للتقديم" }, "path": "/problems",
+      "questions": ["How can I apply, submit a proposal or put myself forward to solve a company challenge? Why is my submission blocked?", "كيف أترشح لحل تحدٍ وأقدم مقترحي للشركة؟ لماذا لا أستطيع إرسال الطلب؟"],
       "facts": [
         "As a talent account with a 100% profile, open a challenge that is still open and before its deadline, then use its proposal/application action.",
         "Write a proposal of at least 10 words explaining your approach, set an estimated delivery time, optionally add a project link/files, confirm ownership/consent, then submit. You can save a draft first.",
@@ -54,6 +60,7 @@
     },
     {
       "id": "applications", "title": { "en": "My Applications", "ar": "طلباتي" }, "path": "/my-applications",
+      "questions": ["Where can I track my submitted application and find out whether I was accepted or rejected?", "أين أتابع طلبي بعد التقديم وأعرف هل قبلتني الشركة أم رفضتني؟"],
       "facts": [
         "Talent can view drafts and submitted proposals in My Applications. Statuses include draft, under review, accepted and rejected; an optional rejection reason may appear.",
         "Notifications announce relevant application decisions and activity. The bot cannot see whether a particular user was accepted, their application status or notifications. It can guide them to My Applications.",
@@ -62,6 +69,7 @@
     },
     {
       "id": "company", "title": { "en": "My Challenges", "ar": "تحدياتي" }, "path": "/company/problems",
+      "questions": ["Where is my company dashboard with my challenges and proposal counts?", "أين لوحة تحكم الشركة وتحدياتي وإحصائيات المقترحات؟"],
       "facts": [
         "Companies use My Challenges for their dashboard, total/open challenge and proposal counts, drafts, published challenges and review actions.",
         "Use Post a challenge to start a new challenge. Open an existing challenge's Review Proposals action to evaluate its submissions. The chatbot cannot read dashboard totals or edit/publish a challenge for the company."
@@ -69,6 +77,7 @@
     },
     {
       "id": "posting", "title": { "en": "Post a challenge", "ar": "نشر تحدٍ" }, "path": "/company/problems/new",
+      "questions": ["How does a company create, save, edit and publish a challenge with requirements, budget and deadline?", "كيف تنشر الشركة تحديًا وتحدد الميزانية والموعد والمتطلبات أو تحفظ مسودة؟"],
       "facts": [
         "Company accounts can post a bug, issue or challenge with title, summary, description, deliverables, constraints, evaluation criteria, skills, difficulty, DZD budget and application deadline. Save a draft or publish using the form.",
         "Put public information in the public fields and sensitive material in private notes/files. Keep highly sensitive industrial data out of the demonstration environment.",
@@ -77,6 +86,7 @@
     },
     {
       "id": "review", "title": { "en": "Review company proposals", "ar": "مراجعة مقترحات الشركة" }, "path": "/company/problems",
+      "questions": ["How do companies review, manually accept or reject an applicant, and close a challenge?", "كيف أراجع المقترحات وأقبل متقدمًا أو أرفضه وأغلق التحدي؟"],
       "facts": [
         "In My Challenges, choose Review Proposals for a challenge. Read submissions and their supporting links/files, then manually accept or reject. Rejection can include a reason.",
         "Accepting selects one applicant and closes that challenge to further applications. Closing a challenge requires confirmation and rejects pending submissions. The bot cannot accept, reject, close or reopen anything.",
@@ -85,6 +95,7 @@
     },
     {
       "id": "ai-brief", "title": { "en": "AI challenge assistant", "ar": "مساعد صياغة التحديات" }, "path": "/company/problems/new",
+      "questions": ["Can AI turn rough company notes into a structured bilingual challenge brief and ask clarifying questions?", "كيف أصيغ تحديًا بالذكاء الاصطناعي انطلاقًا من ملاحظات وأجيب عن أسئلة الاستيضاح؟"],
       "facts": [
         "The company posting screen includes an AI challenge assistant. Describe the current problem, desired outcome and known constraints/budget/dates, generate a draft, answer clarification questions or request changes, and review Arabic/English previews.",
         "Use this draft copies public fields into the normal posting form. Nothing is automatically published; the company reviews, edits and saves/publishes the form. Unknown budget or deadline can remain missing until supplied.",
@@ -93,6 +104,7 @@
     },
     {
       "id": "ai-comparison", "title": { "en": "AI proposal comparison", "ar": "مقارنة المقترحات بالذكاء الاصطناعي" }, "path": "/company/problems",
+      "questions": ["Can AI compare and rank proposals, shortlist applicants and explain which submissions fit best? Does it automatically pick a winner?", "كيف أرتب المتقدمين وأقارن المقترحات بالذكاء الاصطناعي وأعرف الأفضل؟ هل يختار الفائز تلقائيًا؟"],
       "facts": [
         "As the owning company, go to My Challenges, Review Proposals, then Compare with AI. A challenge must be open and have at least two pending/under-review proposals. Already decided proposals and drafts are excluded.",
         "AI compares proposal text, delivery time and declared technical skills against public challenge requirements. It returns rank, fit labels, brief reasons, strengths, gaps and a useful follow-up question. No numerical score is shown.",
@@ -102,6 +114,7 @@
     },
     {
       "id": "community", "title": { "en": "Technical community", "ar": "المجتمع التقني" }, "path": "/community",
+      "questions": ["What is the community? Can companies join discussions, answer questions and add reactions?", "ما هو المجتمع التقني؟ هل يمكن للشركات المشاركة والإجابة والتفاعل؟"],
       "facts": [
         "The community is a public technical question-and-answer feed. Browse questions, search/filter by topic, read answers and use sorting. Both companies and talent can participate.",
         "Signed-in users can ask questions, answer, and add Helpful or Insight reactions to other people's posts. A question's author can select an accepted answer. Community content is public, so do not post confidential specifications or full proprietary solutions.",
@@ -110,10 +123,12 @@
     },
     {
       "id": "ask", "title": { "en": "Ask the community", "ar": "اسأل المجتمع" }, "path": "/community/ask",
+      "questions": ["Where do I ask a technical question and get help with an engineering or programming problem?", "كيف أطرح سؤالًا تقنيًا وأحصل على مساعدة في البرمجة أو الهندسة من المجتمع؟"],
       "facts": ["Sign in, choose Ask a question, add a clear technical title, context/body, relevant skill tags and optional code snippet, then post. For engineering/coding problems outside platform guidance, suggest asking the community instead of answering the technical problem in this chatbot."]
     },
     {
       "id": "reporting", "title": { "en": "Reporting & help", "ar": "الإبلاغ والمساعدة" }, "path": "/support",
+      "questions": ["How do I report spam, abusive posts, confidential information or a scam? Will reporting remove the post?", "كيف أبلغ عن منشور مسيء أو احتيال أو معلومات سرية؟ هل يحذف البلاغ المنشور؟"],
       "facts": [
         "Open the relevant public challenge, community question or answer and choose Report. Sign in if prompted, select a reason and optionally add context. Reasons include spam, abuse, confidentiality/rights, misleading content and other.",
         "Reports are saved privately with a reference. Repeating a report for the same account/content returns the existing reference. Reporting does not automatically remove content or ban anyone. The team reviews reports manually. The bot cannot submit a report on the user's behalf."
@@ -121,6 +136,7 @@
     },
     {
       "id": "support", "title": { "en": "Contact & Support", "ar": "التواصل والدعم" }, "path": "/support",
+      "questions": ["How do I contact a human, send a support request or ask for help with my account?", "كيف أتواصل مع فريق الدعم وأرسل رسالة لمساعدتي في الحساب؟"],
       "facts": [
         "Visitors and signed-in users can use Contact & Support. Enter name, reply email, a topic and a message of at least 10 characters; submit to save a request and receive a reference number.",
         "Topics are General question, Technical issue, Account help and Privacy & data. Requests are handled manually. No automatic email, live human chat, support status tracker or response-time guarantee is implemented. The chatbot cannot file, retrieve or change support tickets.",
@@ -129,14 +145,16 @@
     },
     {
       "id": "privacy", "title": { "en": "Privacy Policy", "ar": "سياسة الخصوصية" }, "path": "/privacy",
+      "questions": ["How can I delete my account or personal data? Who sees private files and what data is sent to AI?", "كيف أحذف حسابي وبياناتي الشخصية؟ من يرى الملفات الخاصة وما الذي يرسل للذكاء الاصطناعي؟"],
       "facts": [
         "The Privacy Policy explains account/profile data, public/private visibility, session cookies, browser language preference, support/report storage and external AI processing through Featherless.",
         "For access, correction or deletion of account data, use Contact & Support and choose Privacy & data. Some profile fields can be edited directly. Do not promise automatic deletion, a retention period, blanket encryption or compliance certifications.",
-        "Ask Rexios sends the question, the last six completed chat exchanges, UI language, broad page category and account type to the configured Featherless model together with this public guide. It cannot read private records. Chat is kept in browser page memory, not saved in a chat database; refresh, New chat or account change clears it. Do not share sensitive information."
+        "Ask Rexios sends the question and, for an ambiguous follow-up, the previous user question to a Featherless embedding model to find relevant public guide sections. It then sends selected guide facts, the question, up to six completed chat exchanges, UI language, page category and account type to the chat model. It cannot read private records. Chat is kept in page memory, not saved in a chat database; refresh, New chat or account change clears it. Do not share sensitive information."
       ]
     },
     {
       "id": "terms", "title": { "en": "Terms of Use", "ar": "شروط الاستخدام" }, "path": "/terms",
+      "questions": ["Who owns a submitted solution? Are NDAs signed here? Does Rexios guarantee payments or hold escrow?", "من يملك الحل المقدم؟ هل نوقع اتفاقية سرية هنا وهل تضمن المنصة الدفع أو تحتفظ بالأموال؟"],
       "facts": [
         "Enterprise data remains the enterprise's intellectual property. Solution rights, confidentiality agreements, payment and delivery terms are arranged directly by the company and candidate.",
         "There is no in-app NDA signing, verified credential workflow, payment processing or automatic IP dispute resolution. Agree on required confidentiality terms directly before sharing private data. The bot can link to the terms but must not give legal advice."
