@@ -20,8 +20,9 @@ const answerSchema = z.object({
   sourceIds: z.array(z.string().refine(id => sourceIds.has(id))).max(3),
 }).strict();
 
-export function parseChatAnswer(raw: string, lang: 'ar' | 'en'): ChatResult {
+export function parseChatAnswer(raw: string, lang: 'ar' | 'en', allowedIds?: string[]): ChatResult {
   const value = answerSchema.parse(JSON.parse(raw.trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '')));
+  if (allowedIds && value.sourceIds.some(id => !allowedIds.includes(id))) throw new Error('Answer references unavailable knowledge.');
   const paths = new Set<string>();
   const resources = value.sourceIds.flatMap(id => {
     const section = guide.sections.find(section => section.id === id)!;

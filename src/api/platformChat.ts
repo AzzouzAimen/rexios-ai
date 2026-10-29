@@ -5,7 +5,7 @@ import type { Language } from '../types';
 export type ChatResource = { id: string; title: string; path: string };
 export type ChatReply = { answer: string; resources: ChatResource[] };
 export type ChatHistory = { role: 'user' | 'assistant'; content: string }[];
-export type ChatProgress = { type: 'preview'; answer: string } | { type: 'phase'; phase: 'answering' | 'repairing'; attempt: number };
+export type ChatProgress = { type: 'preview'; answer: string } | { type: 'phase'; phase: 'retrieving' | 'answering' | 'repairing'; attempt: number };
 
 export async function streamPlatformChat(input: { message: string; history: ChatHistory; lang: Language; page: string }, progress: (event: ChatProgress) => void, signal: AbortSignal) {
   let response: Response;

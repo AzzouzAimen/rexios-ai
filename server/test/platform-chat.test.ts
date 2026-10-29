@@ -6,6 +6,7 @@ import { generatePlatformChat, ChatOutputError } from '../src/ai/platform-chat';
 
 const input = parseChatRequest({ message: 'How do I apply?', lang: 'en' });
 const context = { role: 'VISITOR' as const, page: '/problems' };
+const sections = chatGuide.sections.filter(section => ['profile', 'browsing'].includes(section.id));
 const raw = JSON.stringify({ answer: 'Complete your talent profile, then open a challenge and submit a proposal.', sourceIds: ['profile', 'browsing'] });
 
 test('chat input trims text and accepts only completed user/assistant exchanges', () => {
@@ -26,9 +27,9 @@ test('chat input trims text and accepts only completed user/assistant exchanges'
 test('guide and few-shot examples include workflows, refusal and uncertainty in both languages', () => {
   assert.ok(chatGuide.sections.length >= 12);
   for (const lang of ['ar', 'en'] as const) {
-    const messages = buildChatMessages({ ...input, lang }, context);
+    const messages = buildChatMessages({ ...input, lang }, context, sections);
     const system = String(messages[0].content);
-    assert.match(system, /Featherless|featherless/);
+    assert.match(system, /RETRIEVED KNOWLEDGE/);
     assert.match(system, /untrusted|override/i);
     assert.match(system, /TALENT|VISITOR/);
     const examples = messages.filter(m => m.type === 'ai').map(m => parseChatAnswer(String(m.content), lang));
@@ -47,6 +48,7 @@ test('validated source IDs resolve to curated links only', () => {
   assert.throws(() => parseChatAnswer(JSON.stringify({ answer: 'Click here', sourceIds: ['https://evil.example'] }), 'en'));
   assert.throws(() => parseChatAnswer(JSON.stringify({ answer: ' ', sourceIds: [] }), 'en'));
   assert.throws(() => parseChatAnswer(JSON.stringify({ answer: 'Hi', sourceIds: [], path: 'javascript:alert(1)' }), 'en'));
+  assert.throws(() => parseChatAnswer(raw, 'en', ['support']));
 });
 
 test('chat streams answer prefixes and repairs invalid JSON before final links', async () => {
@@ -60,7 +62,7 @@ test('chat streams answer prefixes and repairs invalid JSON before final links',
       else for (const chunk of [raw.slice(0, 30), raw.slice(30, 70), raw.slice(70)]) yield chunk;
     },
   };
-  const result = await generatePlatformChat(input, context, model, { signal: new AbortController().signal, maxRepairs: 1, progress: e => events.push(e) });
+  const result = await generatePlatformChat(input, context, model, { sections, signal: new AbortController().signal, maxRepairs: 1, progress: e => events.push(e) });
   assert.equal(calls, 2);
   assert.equal(result.resources[0].path, '/profile/solver');
   assert.ok(events.some(e => e.type === 'phase' && e.phase === 'repairing'));

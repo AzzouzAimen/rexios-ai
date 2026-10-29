@@ -15,11 +15,11 @@
 
 ## Task 2: Retrieval and chat integration
 
-- [ ] Test semantic section selection, weak-match behavior, follow-up context and exclusion of unrelated guide content from prompts.
-- [ ] Retrieve a few best sections in memory, carrying the previous question only for ambiguous follow-ups. Calibrate relevance using actual English/Arabic examples. Never fall back to the full guide.
-- [ ] Keep short scope rules and all existing few-shot examples; use only selected facts as authority. Limit final source IDs to provided sections plus the support fallback.
-- [ ] Add retrieval phase to SSE/frontend loading text; use the same timeout/disconnect budget for embeddings and generation. Fail safely if the index is stale or the provider fails.
-- [ ] Update API tests with embedding stubs, verify focused coverage and commit.
+- [x] Test semantic section selection, weak-match behavior, follow-up context and exclusion of unrelated guide content from prompts.
+- [x] Retrieve a few best sections in memory, carrying the previous question only for ambiguous follow-ups. Calibrate relevance using actual English/Arabic examples. Never fall back to the full guide.
+- [x] Keep short scope rules and all existing few-shot examples; use only selected facts as authority. Limit final source IDs to provided sections plus the support fallback.
+- [x] Add retrieval phase to SSE/frontend loading text; use the same timeout/disconnect budget for embeddings and generation. Fail safely if the index is stale or the provider fails.
+- [x] Update API tests with embedding stubs, verify focused coverage and commit.
 
 ## Task 3: Live browser review and handoff
 
@@ -41,3 +41,4 @@
 
 - Read current implementation. Confirmed the small embedding model works with the existing Featherless credentials; no downloads or additional provider required.
 - Task 1 complete: three focused tests and backend build pass; generated 18 x 1024 vectors in a roughly 390 KB JSON artifact. Real bilingual calibration found full factual paragraphs produced overly broad matches, so indexing now uses concise bilingual representative questions/titles, while answers still receive authoritative facts. Comparing 8B did not justify replacing 0.6B; improved topic descriptions made the smaller model useful. Prompt injection remains a scope-rule concern, not a similarity-score security boundary.
+- Task 2 complete: both builds pass, focused chat coverage 15/15 passes, lint has the same four existing warnings. Retrieval supplies up to four relevant sections, using a calibrated floor and relative score window; profile requirements accompany application guidance. Weak matches provide no facts rather than the full guide. All nine few-shot examples remain. Local API restarted; browser review in progress.

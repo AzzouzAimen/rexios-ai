@@ -4,6 +4,8 @@ import { PrismaService } from '../database/prisma.service';
 import { AiUnavailableError, createFeatherlessModel } from './featherless.client';
 import { ChatOutputError, generatePlatformChat } from './platform-chat';
 import { normalizeChatPage, parseChatRequest } from './platform-chat.schema';
+import { retrieveChatKnowledge } from './platform-chat.retrieval';
+import { ChatIndexError } from './platform-chat.index';
 
 function setting(name: string, fallback: number, min: number) {
   const configured = process.env[name]?.trim();
@@ -31,14 +33,16 @@ export class PlatformChatController {
     const send = (event: unknown) => { if (!res.destroyed) res.write(`event: chat\ndata: ${JSON.stringify(event)}\n\n`); };
     const heartbeat = setInterval(() => { if (!res.destroyed) res.write(': keepalive\n\n'); }, 15000);
     try {
+      send({ type: 'phase', phase: 'retrieving', attempt: 0 });
+      const sections = await retrieveChatKnowledge(input, undefined, abort.signal);
       const result = await generatePlatformChat(input, context, createFeatherlessModel(), {
-        signal: abort.signal, maxRepairs: setting('AI_MAX_REPAIR_ATTEMPTS', 2, 0),
+        sections, signal: abort.signal, maxRepairs: setting('AI_MAX_REPAIR_ATTEMPTS', 2, 0),
         progress: event => { if (!abort.signal.aborted) send(event); },
       });
       send({ type: 'complete', result });
     } catch (error) {
       const providerStatus = (error as { status?: number })?.status;
-      const status = error instanceof AiUnavailableError ? 503 : error instanceof ChatOutputError ? 422 : abort.signal.aborted ? 504 : providerStatus === 429 || providerStatus === 503 ? 503 : 502;
+      const status = error instanceof AiUnavailableError || error instanceof ChatIndexError ? 503 : error instanceof ChatOutputError ? 422 : abort.signal.aborted ? 504 : providerStatus === 429 || providerStatus === 503 ? 503 : 502;
       const message = input.lang === 'ar' ? 'تعذر إكمال الرد. حاول مجددًا أو تواصل مع فريق الدعم.' : 'Could not finish the reply. Try again or contact support.';
       send({ type: 'error', status, message });
     } finally {

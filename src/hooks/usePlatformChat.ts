@@ -7,7 +7,7 @@ export type ChatTurn = { id: string; question: string; answer: string; resources
 export function usePlatformChat(lang: Language, page: string) {
   const [turns, setTurns] = useState<ChatTurn[]>([]);
   const [busy, setBusy] = useState(false);
-  const [phase, setPhase] = useState<'answering' | 'repairing'>('answering');
+  const [phase, setPhase] = useState<'retrieving' | 'answering' | 'repairing'>('retrieving');
   const controller = useRef<AbortController | null>(null);
   const sequence = useRef(0);
   useEffect(() => () => { sequence.current++; controller.current?.abort(); }, []);
@@ -30,7 +30,7 @@ export function usePlatformChat(lang: Language, page: string) {
     const id = `chat-${current}`;
     const abort = new AbortController(); controller.current = abort;
     setTurns(previous => [...previous.filter(turn => turn.id !== replaceId), { id, question: message, answer: '', resources: [], lang, status: 'streaming' }]);
-    setBusy(true); setPhase('answering');
+    setBusy(true); setPhase('retrieving');
     const update = (data: Partial<ChatTurn>) => {
       if (current === sequence.current) setTurns(previous => previous.map(turn => turn.id === id ? { ...turn, ...data } : turn));
     };
