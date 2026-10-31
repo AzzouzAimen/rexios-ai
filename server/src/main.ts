@@ -10,6 +10,8 @@ import { Pool } from 'pg';
 import { DatabaseModule, PrismaService } from './database/prisma.service';
 import { ApiErrorFilter, SessionGuard } from './common/http';
 import { AuthController, AuthService } from './auth/auth.controller';
+import { GoogleAuthController } from './auth/google-auth.controller';
+import { GoogleAuthService } from './auth/google-auth.service';
 import { ProfilesController } from './profiles/profiles.controller';
 import { ProblemsController, CompanyProblemsController } from './problems/problems.controller';
 import { ProblemsService } from './problems/problems.service';
@@ -37,7 +39,7 @@ class HealthController {
   constructor(private readonly db: PrismaService) {}
   @Get() async health() { await this.db.$queryRaw`SELECT 1`; return { status: 'ok' }; }
 }
-@Module({ imports: [DatabaseModule], controllers: [HealthController, AuthController, ProfilesController, ProblemsController, CompanyProblemsController, ApplicationsController, CommentsController, FilesController, CommunityController, MetaController, NotificationsController, PublicController, ChallengeBriefController, ProposalComparisonController, SupportController, ReportsController, PlatformChatController], providers: [AuthService, SessionGuard, ProblemsService, ApplicationsService, FilesService, CommunityService, NotificationsService, PublicService, ChallengeBriefService, ProposalComparisonService] })
+@Module({ imports: [DatabaseModule], controllers: [HealthController, AuthController, GoogleAuthController, ProfilesController, ProblemsController, CompanyProblemsController, ApplicationsController, CommentsController, FilesController, CommunityController, MetaController, NotificationsController, PublicController, ChallengeBriefController, ProposalComparisonController, SupportController, ReportsController, PlatformChatController], providers: [AuthService, GoogleAuthService, SessionGuard, ProblemsService, ApplicationsService, FilesService, CommunityService, NotificationsService, PublicService, ChallengeBriefService, ProposalComparisonService] })
 class AppModule {}
 
 export async function bootstrap(port = Number(process.env.PORT || 3000)) {

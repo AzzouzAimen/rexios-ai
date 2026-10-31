@@ -4,6 +4,7 @@ import { hash, compare } from 'bcryptjs';
 import { PrismaService, accountInclude } from '../database/prisma.service';
 import { AuthRequest, SessionGuard } from '../common/http';
 import { presentUser } from '../common/present-user';
+import { startSession } from './auth-session';
 
 class LoginDto {
   @IsEmail() email!: string;
@@ -39,16 +40,11 @@ export class AuthController {
     if (++attempt.count > 40 || this.attempts.size > 10000) throw new HttpException('Too many attempts. Try again later.', 429);
     this.attempts.set(key, attempt);
   }
-  private async session(req: AuthRequest, id: string) {
-    await new Promise<void>((resolve, reject) => req.session.regenerate(error => error ? reject(error) : resolve()));
-    req.session.userId = id;
-    await new Promise<void>((resolve, reject) => req.session.save(error => error ? reject(error) : resolve()));
-  }
   @Post('register') async register(@Body() body: RegisterDto, @Req() req: AuthRequest) {
-    this.limit(req); const user = await this.auth.register(body); await this.session(req, user.id); return presentUser(user);
+    this.limit(req); const user = await this.auth.register(body); await startSession(req, user.id); return presentUser(user);
   }
   @Post('login') @HttpCode(200) async login(@Body() body: LoginDto, @Req() req: AuthRequest) {
-    this.limit(req); const user = await this.auth.login(body); await this.session(req, user.id); return presentUser(user);
+    this.limit(req); const user = await this.auth.login(body); await startSession(req, user.id); return presentUser(user);
   }
   @Get('me') @UseGuards(SessionGuard) me(@Req() req: AuthRequest) { return presentUser(req.user); }
   @Post('logout') @HttpCode(200) async logout(@Req() req: AuthRequest) {

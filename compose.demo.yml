@@ -16,6 +16,10 @@ services:
       DATABASE_URL: "postgresql://${POSTGRES_USER:-rexios}:${POSTGRES_PASSWORD:-rexios_local}@db:5432/${POSTGRES_DB:-rexios}"
       SESSION_SECRET: "${SESSION_SECRET:?Copy .env.example to .env and set SESSION_SECRET}"
       APP_ORIGIN: "${APP_ORIGIN:-http://localhost:8080,http://127.0.0.1:8080}"
+      APP_PUBLIC_URL: "${APP_PUBLIC_URL:-http://localhost:8080}"
+      GOOGLE_CLIENT_ID: "${GOOGLE_CLIENT_ID:-}"
+      GOOGLE_CLIENT_SECRET: "${GOOGLE_CLIENT_SECRET:-}"
+      GOOGLE_CALLBACK_URL: "${GOOGLE_CALLBACK_URL:-}"
       UPLOAD_DIR: /app/uploads
       SECURE_COOKIES: "${SECURE_COOKIES:-false}"
       TRUST_PROXY: "${TRUST_PROXY:-false}"

@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-29",
+  "version": "2026-10-31",
   "purpose": "Authoritative public product guide for Ask Rexios. Describes implemented MVP behavior, not live account data or a future roadmap.",
   "sections": [
     {
@@ -26,7 +26,8 @@
       "questions": ["How do I log in or log out? Google sign-in is not working. Can I reset my password?", "كيف أسجل الدخول والخروج؟ لماذا لا يعمل زر جوجل أو استعادة كلمة المرور؟"],
       "facts": [
         "Sign in with email and password. Use the profile/sidebar logout action to change accounts. Language is switched from the navigation bar/sidebar.",
-        "Google sign-in and password recovery controls are placeholders in this MVP. They do not perform Google OAuth or send recovery emails. For account help use Contact & Support; the chatbot cannot reset passwords.",
+        "Continue with Google works when the operator configures Google OAuth. If the page says it is not configured, use email and password instead. New Google accounts use the type selected on signup; new users starting from sign-in default to talent. Existing linked accounts keep their role. Google does not complete talent qualifications or verify company credentials.",
+        "Password recovery is still a placeholder and does not send recovery emails. Use the eye button to show or hide a password you are entering. For account help use Contact & Support; the chatbot cannot reset passwords.",
         "If your session has expired, sign in again. If a connection error prevents session checking, use the retry action and check connectivity. Never share a password, session cookie or API key in chat."
       ]
     },

@@ -39,6 +39,10 @@ services:
       DATABASE_URL: "postgresql://rexios:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env.vps}@db:5432/rexios"
       SESSION_SECRET: "${SESSION_SECRET:?Set SESSION_SECRET in .env.vps}"
       APP_ORIGIN: https://rexios.duckdns.org
+      APP_PUBLIC_URL: https://rexios.duckdns.org
+      GOOGLE_CLIENT_ID: "${GOOGLE_CLIENT_ID:-}"
+      GOOGLE_CLIENT_SECRET: "${GOOGLE_CLIENT_SECRET:-}"
+      GOOGLE_CALLBACK_URL: "${GOOGLE_CALLBACK_URL:-https://rexios.duckdns.org/api/auth/google/callback}"
       UPLOAD_DIR: /app/uploads
       SECURE_COOKIES: "true"
       TRUST_PROXY: "true"

@@ -2,7 +2,7 @@
 
 The core MVP keeps the existing React/Vite frontend and adds a NestJS API backed by PostgreSQL. Company and talent accounts can use persistent profiles, publish and browse industrial problems, save or submit applications, review decisions, and discuss a problem. The API owns role checks and private data access.
 
-Seeded companies, profiles, discussions, applications and community posts are synthetic demo content. Both the standalone community and discussions attached to problems use the API. Google sign-in and password recovery controls remain visible no-ops.
+Seeded companies, profiles, discussions, applications and community posts are synthetic demo content. Both the standalone community and discussions attached to problems use the API. Google sign-in is available after [operator configuration](GOOGLE-SIGNIN.md); password recovery remains deferred.
 
 Seed copy includes Arabic and English proposals, rejection feedback, private notes and talent profile names/background. Education and experience store canonical option values with translated labels. Technical identifiers, code and product names retain their usual spelling. Demo contacts use reserved `.example` addresses; portfolio links are neutral examples, not evidence of real work. See [the content audit](CONTENT-AUDIT.md) for screen coverage and corrections.
 
@@ -19,7 +19,9 @@ Seed copy includes Arabic and English proposals, rejection feedback, private not
 | About figures | Actual company/talent/open budget/selection aggregates; no payout/completion claims |
 | Welcome and landing navigation | Uses the actual account role and profile completeness |
 | Landing illustrations, mission and guidelines | Static explanatory content |
-| Google/recovery and design-preview controls | Visible no-ops; AI/agents are still future work |
+| Google sign-in | Server-side OAuth, enabled with Google client credentials |
+| AI features | Bilingual challenge briefs, proposal comparison, and Ask Rexios |
+| Password recovery | Deferred; the visible control remains a no-op |
 
 Community endpoints are under `/api/community`: `GET/POST questions`, exact-ID question detail, paginated `questions/:id/answers`, idempotent PUT/DELETE question/answer reactions, owner-only `PUT questions/:id/accepted-answer`, `POST questions/:id/view`, and `GET overview`. Guest browsing is public; posting, answering and reacting require a session. Bodies and code render as text. Feed search supports q/tag and latest/active/unanswered sorting; unanswered means zero answers. An unknown question returns 404.
 

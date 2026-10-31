@@ -2,7 +2,7 @@
 
 Rexios AI is a demo platform for industrial open challenges and technical talent in Algeria. The core MVP connects company and talent accounts through challenge posting, browsing, applications, review decisions, and problem discussions.
 
-The current sample records are synthetic. The community forum and problem discussions are persisted, with real questions, answers, reactions, author-selected answers and activity notifications. About-page figures reflect the database, and onboarding follows the signed-in account. Google sign-in, password recovery and design-preview controls remain visible no-ops. AI/agent features are future work.
+The current sample records are synthetic. The community forum and problem discussions are persisted, with real questions, answers, reactions, author-selected answers and activity notifications. About-page figures reflect the database, and onboarding follows the signed-in account. AI features include bilingual challenge briefs, proposal comparison and Ask Rexios. Google sign-in is optional and requires operator configuration; password recovery remains deferred. See [Google sign-in setup](docs/GOOGLE-SIGNIN.md) and [judge demo preparation](docs/DEMO-PREPARATION.md).
 
 ## Local development
 
