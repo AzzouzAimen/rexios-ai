@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { DifficultyMeter } from '../components/DifficultyMeter';
+import { ChallengeStatus } from '../components/ChallengeStatus';
 import { TagChip } from '../components/TagChip';
 import { useMetadata } from '../hooks/useMetadata';
 import { problemCategoryLabel } from '../utils/localizedLabels';
@@ -98,8 +99,8 @@ export const ProblemsListPage: React.FC = () => {
           </h1>
           <p className="text-xs sm:text-sm text-[#5B5B7B] mt-1">
             {lang === 'ar'
-              ? 'تحديات حقيقية منشورة من شركات ومصانع جزائرية بميزانيات معتمدة ومتطلبات تقنية واضحة.'
-              : 'Real challenges posted by Algerian industrial companies with verified budgets and clear requirements.'}
+              ? 'تحديات منشورة من شركات ومصانع جزائرية بميزانيات معلنة ومتطلبات تقنية واضحة.'
+              : 'Challenges posted by Algerian industrial companies with listed budgets and clear requirements.'}
           </p>
         </div>
         {currentRole === 'company' && (
@@ -145,7 +146,7 @@ export const ProblemsListPage: React.FC = () => {
         <div className="card-pixel p-5 text-center bg-[#F0FFC4]">
           <p className="font-num text-2xl font-bold text-[#12122B]">{problems.reduce((sum, p) => sum + p.rewardAmount, 0).toLocaleString(lang === 'ar' ? 'fr-DZ' : 'en-US')} {lang === 'ar' ? 'د.ج' : 'DZD'}</p>
           <p className="text-xs font-bold text-[#12122B] mt-1">
-            {lang === 'ar' ? 'مجموع ميزانيات هذه الصفحة' : 'Budget total on this page'}
+            {lang === 'ar' ? 'مجموع الميزانيات المعلنة في هذه الصفحة' : 'Total listed budget on this page'}
           </p>
         </div>
         <div className="card-pixel p-5 text-center">
@@ -225,8 +226,8 @@ export const ProblemsListPage: React.FC = () => {
                   key={p.id}
                   className="card-pixel p-6 hover:translate-y-[-2px] transition-transform flex flex-col gap-4"
                 >
-                  <div className="flex items-center justify-between text-xs text-[#5B5B7B]">
-                    <div className="flex items-center gap-2.5">
+                  <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-[#5B5B7B]">
+                    <div className="flex min-w-0 items-center gap-2.5">
                       <div className="w-7 h-7 rounded-full bg-[#12122B] text-[#FFFBF1] flex items-center justify-center font-bold text-xs">
                         {lang === 'ar' ? p.companyAvatar : p.companyName_en?.trim().slice(0, 1) || p.companyAvatar}
                       </div>
@@ -242,6 +243,7 @@ export const ProblemsListPage: React.FC = () => {
                     <span>{lang === 'ar' ? p.postedAt : p.postedAt_en}</span>
                   </div>
 
+                  <ChallengeStatus problem={p} lang={lang} />
                   <Link
                     to={`/problems/${p.id}`}
                     className="text-lg font-bold text-[#12122B] hover:text-[#0B2A9E] transition-colors leading-snug"
@@ -279,7 +281,7 @@ export const ProblemsListPage: React.FC = () => {
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-4 text-xs text-[#5B5B7B]">
+                    <div className="flex flex-wrap items-center gap-4 text-xs text-[#5B5B7B]">
                       <div className="flex items-center gap-1">
                         <Users className="w-3.5 h-3.5" />
                         <span>

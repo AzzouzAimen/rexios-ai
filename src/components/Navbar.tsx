@@ -17,13 +17,13 @@ import { CollapsibleSidebar } from './CollapsibleSidebar';
 import { useNotifications } from '../hooks/useNotifications';
 
 export const Navbar: React.FC = () => {
-  const { lang, setLang, currentRole, currentUser, switchRole, logout } = useApp();
+  const { lang, setLang, currentRole, currentUser, authLoading, switchRole, logout } = useApp();
   const location = useLocation();
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const handleCloseSidebar = React.useCallback(() => setSidebarOpen(false), []);
 
-  const notifications = useNotifications(currentUser?.id || '');
+  const notifications = useNotifications(!authLoading && currentUser.role !== 'visitor' ? currentUser.id : null);
 
   useEffect(() => {
     setProfileDropdownOpen(false);
@@ -58,8 +58,8 @@ export const Navbar: React.FC = () => {
   return (
     <>
       <header className="sticky top-0 z-40 w-full bg-[#FFFBF1] border-b-2 border-[#12122B] shadow-pixel-s">
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 h-18 flex items-center justify-between gap-3">
-          <div className="flex items-center gap-2 sm:gap-4">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 h-18 flex items-center justify-between gap-2 sm:gap-3">
+          <div className="flex min-w-0 items-center gap-2 sm:gap-4">
             <button
               type="button"
               onClick={() => setSidebarOpen(true)}
@@ -74,7 +74,7 @@ export const Navbar: React.FC = () => {
               <div className="p-1 sm:p-1.5 bg-[#FFFBF1] border-2 border-[#12122B] rounded-md shadow-pixel-s group-hover:scale-105 transition-transform">
                 <MascotRex width={28} height={21} className="sm:w-8 sm:h-[24px]" />
               </div>
-              <span className="font-brand text-base sm:text-xl font-bold tracking-tight text-[#12122B] whitespace-nowrap">
+              <span className="hidden min-[400px]:inline font-brand text-base sm:text-xl font-bold tracking-tight text-[#12122B] whitespace-nowrap">
                 REXIOS AI
               </span>
             </Link>

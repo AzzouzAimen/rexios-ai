@@ -86,7 +86,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const setLang = (newLang: Language) => { setLangState(newLang); localStorage.setItem('rexios_lang', newLang); };
   const toggleLang = () => setLang(lang === 'ar' ? 'en' : 'ar');
-  useEffect(() => { document.documentElement.lang = lang; document.documentElement.dir = dir; }, [lang, dir]);
+  useEffect(() => {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = dir;
+    document.title = lang === 'ar'
+      ? 'Rexios AI — حيث تلتقي المهارات التقنية بالمشكلات الحقيقية'
+      : 'Rexios AI — Where tech skills meet real problems';
+  }, [lang, dir]);
 
   const refreshApplications = async () => {
     if (currentRole === 'visitor' || currentRole === 'company') { setSubmissions([]); return; }

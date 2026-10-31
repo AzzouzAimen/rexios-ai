@@ -102,26 +102,6 @@ const SolverProfileContent: React.FC = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <div className="mb-6 p-3 bg-[#FFFBF1] border-2 border-[#12122B] rounded-md shadow-pixel-s flex items-center justify-between text-xs">
-        <span className="font-bold text-[#12122B]">
-          {lang === 'ar'
-            ? 'عرض نمط التصميم (شاشة 04 / شاشة 04b):'
-            : 'Design Mode View (Screen 04 / Screen 04b):'}
-        </span>
-        <label className="flex items-center gap-2 cursor-pointer font-semibold text-[#0B2A9E]">
-          <input
-            type="checkbox"
-            onChange={() => undefined}
-            className="accent-[#E5432A]"
-          />
-          <span>
-            {lang === 'ar'
-              ? 'تفعيل حالة أخطاء التحقق (شاشة 04b)'
-              : 'Toggle Validation Errors State (Screen 04b)'}
-          </span>
-        </label>
-      </div>
-
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         <div className="lg:col-span-4 card-pixel p-6 bg-[#EEF1FF] flex flex-col gap-5 border-[#0B2A9E]">
           <div className="flex items-center gap-3">

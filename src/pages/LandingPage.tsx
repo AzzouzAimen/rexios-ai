@@ -28,12 +28,12 @@ export const LandingPage: React.FC = () => {
       : currentRole === 'solver'
         ? (lang === 'ar' ? 'تصفّح التحديات' : 'Browse challenges')
         : (lang === 'ar' ? 'أكمل ملف المواهب' : 'Complete talent profile');
-  const secondaryTo = currentRole === 'solver' ? '/my-applications' : currentRole === 'company' ? '/company/problems/new' : '/community';
+  const secondaryTo = currentRole === 'solver' ? '/my-applications' : currentRole === 'company' ? '/company/problems/new' : '/problems';
   const secondaryLabel = currentRole === 'solver'
     ? (lang === 'ar' ? 'طلباتي' : 'My applications')
     : currentRole === 'company'
       ? (lang === 'ar' ? 'اطرح تحديًا' : 'Post a challenge')
-      : (lang === 'ar' ? 'تصفّح المجتمع' : 'Browse community');
+      : (lang === 'ar' ? 'تصفّح التحديات' : 'Browse challenges');
 
   return (
     <div className="flex flex-col gap-16 md:gap-24 py-10">

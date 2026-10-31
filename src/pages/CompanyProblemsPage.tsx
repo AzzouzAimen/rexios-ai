@@ -19,12 +19,8 @@ import { apiErrorMessage } from '../api/client';
 import { mapApiProblem } from '../api/mappers';
 import type { ApiProblem } from '../api/contracts';
 import type { Problem } from '../types';
-
-const statusText = (status: Problem['status'], lang: 'ar' | 'en') => {
-  if (status === 'OPEN') return lang === 'ar' ? 'مفتوحة لتلقي العروض' : 'Open for proposals';
-  if (status === 'CLOSED') return lang === 'ar' ? 'مكتملة ومغلقة' : 'Closed';
-  return lang === 'ar' ? 'مسودة' : 'Draft';
-};
+import { ChallengeStatus } from '../components/ChallengeStatus';
+import { isChallengeOpen } from '../utils/challengeAvailability';
 
 const CompanyProblemsContent: React.FC = () => {
   const { lang } = useApp();
@@ -73,8 +69,9 @@ const CompanyProblemsContent: React.FC = () => {
     }
   };
 
-  const openCount = items.filter((p) => p.status === 'OPEN').length;
+  const openCount = items.filter((p) => isChallengeOpen(p)).length;
   const totalProposals = items.reduce((sum, p) => sum + (p.proposalsCount || 0), 0);
+  const comparisonDemo = items.find(p => p.id === 'demo-proposal-comparison' && isChallengeOpen(p) && p.proposalsCount >= 2);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-8">
@@ -130,6 +127,14 @@ const CompanyProblemsContent: React.FC = () => {
           </p>
         </div>
       </div>
+
+      {comparisonDemo && <div className="card-pixel p-5 bg-[#EEF1FF] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="space-y-1">
+          <h2 className="text-sm font-bold flex items-center gap-2"><Sparkles className="w-4 h-4 shrink-0 text-[#0B2A9E]" />{lang === 'ar' ? 'جرّب مقارنة المقترحات بالذكاء الاصطناعي' : 'Try AI proposal comparison'}</h2>
+          <p className="text-xs text-[#5B5B7B]">{lang === 'ar' ? 'قارن منهجيات حل تحدي سجل عيوب الخياطة دون اتصال، واكتشف نقاط القوة والفجوات.' : 'Compare approaches to the offline stitching defect log and see their strengths and gaps.'}</p>
+        </div>
+        <Link to={`/company/problems/${comparisonDemo.id}/applications`} className="btn-pixel-accent px-4 py-2.5 rounded-md text-xs font-bold text-center shrink-0">{lang === 'ar' ? 'استكشف المقارنة' : 'Explore comparison'}</Link>
+      </div>}
 
       <div className="card-pixel p-5 sm:p-6 bg-[#FFFBF1] border-2 border-[#12122B] shadow-pixel-s">
         <h2 className="text-sm font-bold text-[#12122B] mb-3 flex items-center gap-2">
@@ -213,18 +218,7 @@ const CompanyProblemsContent: React.FC = () => {
             <article key={problem.id} className="card-pixel p-4 sm:p-6 flex flex-col gap-4">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
-                  <span
-                    className={
-                      'inline-flex px-2.5 py-1 border border-[#12122B] rounded-full text-[10px] font-bold ' +
-                      (problem.status === 'OPEN'
-                        ? 'bg-[#D9F5E5] text-[#1E9E5A]'
-                        : problem.status === 'CLOSED'
-                        ? 'bg-[#EFE4CC] text-[#5B5B7B]'
-                        : 'bg-[#FFF1CC] text-[#12122B]')
-                    }
-                  >
-                    {statusText(problem.status, lang)}
-                  </span>
+                  <ChallengeStatus problem={problem} lang={lang} />
                   <h2 className="text-base sm:text-lg font-bold text-[#12122B] mt-2">
                     {lang === 'ar' ? problem.title : problem.title_en}
                   </h2>

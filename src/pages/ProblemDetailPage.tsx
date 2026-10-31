@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { ReportButton } from '../components/ReportButton';
 import { DifficultyMeter } from '../components/DifficultyMeter';
+import { ChallengeStatus } from '../components/ChallengeStatus';
 import { TagChip } from '../components/TagChip';
 import {
   Coins,
@@ -151,6 +152,7 @@ const ProblemDetailContent: React.FC = () => {
               <DifficultyMeter difficulty={problem.difficulty} />
             </div>
 
+            <ChallengeStatus problem={problem} lang={lang} />
             <div className="flex items-start justify-between gap-3">
               <h1 className="text-2xl sm:text-3xl font-bold text-[#12122B] leading-tight">
                 {lang === 'ar' ? problem.title : problem.title_en}

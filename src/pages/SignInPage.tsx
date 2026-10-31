@@ -104,6 +104,9 @@ export const SignInPage: React.FC = () => {
               <span className="text-[10px] text-[#C9D3FF]/70 font-mono">pwd: 123</span>
             </div>
 
+            <p className="text-[11px] leading-relaxed text-[#C9D3FF]">
+              {lang === 'ar' ? 'اختر حسابًا لملء البيانات، ثم اضغط تسجيل الدخول.' : 'Select an account to fill the credentials, then press Sign in.'}
+            </p>
             <div className="flex flex-col gap-1.5">
               <span className="text-[10px] font-bold text-[#C9D3FF] uppercase tracking-wider">
                 {lang === 'ar' ? 'الشركات الصناعية' : 'Companies'}
@@ -114,7 +117,7 @@ export const SignInPage: React.FC = () => {
                     key={acc.email}
                     type="button"
                     onClick={() => handleSelectDemo(acc.email)}
-                    className={`px-2 py-1.5 rounded text-[10px] font-bold text-start truncate transition-all cursor-pointer ${
+                    className={`px-2 py-1.5 rounded text-[10px] font-bold text-start transition-all cursor-pointer ${acc.email === 'c@demo.test' ? 'col-span-2 border border-[#C6FF3D]' : ''} ${
                       email === acc.email
                         ? 'bg-[#C6FF3D] text-[#12122B] shadow-pixel-s'
                         : 'bg-[#1B3FC4] text-[#FFFBF1] hover:bg-[#1B3FC4]/80'
@@ -122,6 +125,7 @@ export const SignInPage: React.FC = () => {
                     title={`${acc.label[lang]} (${acc.email})`}
                   >
                     {acc.label[lang]}
+                    {acc.email === 'c@demo.test' && <span className="block mt-0.5 text-[10px] font-normal">{lang === 'ar' ? 'التجربة المقترحة — استكشف ميزات الذكاء الاصطناعي' : 'Recommended demo — explore AI features'}</span>}
                   </button>
                 ))}
               </div>

@@ -36,8 +36,8 @@ export const AboutPage: React.FC = () => {
     },
     {
       num: formatBudget(publicStats?.openBudgetDzd),
-      label: { ar: 'ميزانيات التحديات المفتوحة (د.ج)', en: 'Open challenge budgets (DZD)' },
-      detail: { ar: 'ميزانيات مفتوحة بموعد نهائي قادم', en: 'Open budgets with a future deadline' },
+      label: { ar: 'الميزانية المتاحة للتحديات المفتوحة (د.ج)', en: 'Available budget across open challenges (DZD)' },
+      detail: { ar: 'مجموع الميزانيات المعلنة بموعد قادم على المنصة', en: 'Platform-wide listed budgets with a future deadline' },
     },
     {
       num: formatCount(publicStats?.problemsWithSelectedApplicant),
