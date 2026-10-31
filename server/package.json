@@ -10,6 +10,8 @@
     "db:migrate": "prisma migrate deploy",
     "db:seed": "prisma db seed",
     "db:seed:proposals": "tsx scripts/seed-proposal-demo.ts",
+    "db:demo:prepare": "tsx scripts/prepare-demo.ts",
+    "db:demo:compare": "tsx scripts/prepare-demo-comparison.ts",
     "test:ai": "tsx --test --test-concurrency=1 test/ai-brief*.test.ts",
     "ai:evaluate": "tsx scripts/evaluate-ai-brief.ts",
     "ai:index-guide": "tsx scripts/index-platform-guide.ts",

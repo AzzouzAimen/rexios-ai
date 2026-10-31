@@ -120,7 +120,7 @@ const SolverProfileContent: React.FC = () => {
               </div>
               <span className="font-semibold">
                 {lang === 'ar'
-                  ? 'تقديم عروض تقنية للتحديات الصناعية ذات الميزانيات المعتمدة'
+                  ? 'تقديم عروض تقنية للتحديات الصناعية ذات الميزانيات المعلنة'
                   : 'Submit proposals to budgeted company challenges'}
               </span>
             </div>
