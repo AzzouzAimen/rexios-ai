@@ -201,7 +201,7 @@ export const CommunityFeedPage: React.FC = () => {
                 <div className="flex flex-wrap gap-1.5 pt-1">
                   {question.tags.map((skill) => <TagChip key={skill} tag={skill} size="sm" onClick={() => updateFilter('tag', skill)} />)}
                 </div>
-                <div className="flex items-center justify-between pt-3 border-t border-[#EFE4CC] text-xs">
+                <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-[#EFE4CC] text-xs">
                   <div className="flex items-center gap-4 text-[#5B5B7B]">
                     <span className="inline-flex items-center gap-1.5"><Eye className="w-3.5 h-3.5" /><span>{question.views}</span></span>
                     <span className="inline-flex items-center gap-1.5"><MessageSquare className="w-3.5 h-3.5" /><span>{lang === 'ar' ? `${question.answerCount} إجابات` : `${question.answerCount} answers`}</span></span>
