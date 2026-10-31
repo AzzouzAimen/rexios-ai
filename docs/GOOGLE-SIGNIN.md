@@ -43,7 +43,11 @@ GOOGLE_CLIENT_SECRET=PASTE_CLIENT_SECRET_HERE
 GOOGLE_CALLBACK_URL=http://127.0.0.1:5173/api/auth/google/callback
 ```
 
-Keep `APP_ORIGIN` allowing the same origin. From the repository root:
+Keep `APP_ORIGIN` allowing the same origin.
+
+For convenience, blank Google settings in `server/.env` also fall back to the root `.env`, like the AI settings. Explicit process/server values take precedence. The root packaged-demo URLs use port 8080; keep the server's explicit 5173 URLs when running Vite locally.
+
+From the repository root:
 
 ```sh
 npm run db:migrate

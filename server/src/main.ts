@@ -12,6 +12,7 @@ import { ApiErrorFilter, SessionGuard } from './common/http';
 import { AuthController, AuthService } from './auth/auth.controller';
 import { GoogleAuthController } from './auth/google-auth.controller';
 import { GoogleAuthService } from './auth/google-auth.service';
+import { loadGoogleEnvironment } from './auth/google.environment';
 import { ProfilesController } from './profiles/profiles.controller';
 import { ProblemsController, CompanyProblemsController } from './problems/problems.controller';
 import { ProblemsService } from './problems/problems.service';
@@ -44,6 +45,7 @@ class AppModule {}
 
 export async function bootstrap(port = Number(process.env.PORT || 3000)) {
   loadAiEnvironment();
+  loadGoogleEnvironment();
   if (!process.env.SESSION_SECRET || !process.env.DATABASE_URL) throw new Error('DATABASE_URL and SESSION_SECRET are required.');
   const app = await NestFactory.create<NestExpressApplication>(AppModule, { logger: ['error', 'warn'], bodyParser: false });
   app.useBodyParser('json', { limit: '1mb' });

@@ -17,6 +17,8 @@ test('Google OAuth handles real sessions, account types, identity validation and
   execFileSync(process.execPath, ['node_modules/prisma/build/index.js', 'migrate', 'deploy'], { env: process.env, stdio: 'pipe' });
   const { bootstrap } = require('../dist/main');
   const { app, pool } = await bootstrap(0);
+  // Local root .env may contain real credentials; this test controls all OAuth config.
+  delete process.env.GOOGLE_CLIENT_ID; delete process.env.GOOGLE_CLIENT_SECRET;
   const db = app.get(require('../dist/database/prisma.service').PrismaService);
   const service = app.get(require('../dist/auth/google-auth.service').GoogleAuthService);
   const { safeReturnTo } = require('../dist/auth/google-auth.service');
